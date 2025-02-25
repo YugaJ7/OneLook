@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:onelook/components/button.dart';
+import 'package:onelook/components/smalloutlinedbutton.dart';
+import 'package:onelook/components/text.dart';
+import 'package:onelook/constants/app_color.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  @override
+  _OnboardingScreenState createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  final List<Widget> _pages = [
+    OnboardingPage(
+      image: 'assets/onboarding/calm.svg',
+      title: 'Keep calm and stay in control',
+      description: 'You can check your health with just one.',
+    ),
+    OnboardingPage(
+      image: 'assets/onboarding/pills.svg',
+      title: 'Don\'t miss a single pill, ever!',
+      description: 'Plan your supplementation in details.',
+    ),
+    OnboardingPage(
+      image: 'assets/onboarding/yoga.svg',
+      title: 'Exercise more & breathe better',
+      description: 'Learn, measure, set daily goals.',
+    ),
+  ];
+
+  void _nextPage() {
+    if (_currentPage < _pages.length - 1) {
+      _pageController.nextPage(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.lightvoilet,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.8, 
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _currentPage = page;
+                    });
+                  },
+                  children: _pages,
+                ),
+              ),
+              SizedBox(
+                height: 88,
+                width: 88,
+                child: ElevatedButton(
+                  onPressed: _nextPage,
+                  child: Image.asset('assets/arrowright.png', width: 40, height: 40),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    padding: EdgeInsets.all(20),
+                    backgroundColor: AppColors.purpleplum,
+                ),
+              ),),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    _pages.length,
+                    (index) => Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8.0),
+                      width: 60.0,
+                      height: 4.0,
+                      decoration: BoxDecoration(
+                        color: index <= _currentPage
+                            ? AppColors.purpleplum
+                            : AppColors.lilacdark,
+                        borderRadius: BorderRadius.circular(2.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 40,
+            right: 20,
+            child: SmallOutlinedButton(
+              text: 'Skip Intro',
+              onPressed: () {
+                
+              },
+              textStyle: TextStyles.buttontext2,
+              buttonStyle: ButtonStyles.smallprimary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OnboardingPage extends StatelessWidget {
+  final String image;
+  final String title;
+  final String description;
+
+  OnboardingPage({
+    required this.image,
+    required this.title,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(30.0,30.0,30.0,0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(image),
+          SizedBox(height: 40),
+          Text(
+            title,
+            style: TextStyles.withColor(textcolor: AppColors.deepblue).headline1,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20),
+          Text(
+            description,
+            style: TextStyles.withColor(textcolor: AppColors.coldgrey).bodytext1,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}

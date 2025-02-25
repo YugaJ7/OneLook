@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onelook/constants/app_color.dart';
 
 class TextStyles {
   Color? textcolor;
@@ -26,6 +27,14 @@ class TextStyles {
    static var buttontext1 = GoogleFonts.notoSans(
     color: Colors.white,
     fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: .12,
+    wordSpacing: 2,
+    height: 1.50
+   );
+  static var buttontext2 = GoogleFonts.notoSans(
+    color: AppColors.purpleplum,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
     letterSpacing: .12,
     wordSpacing: 2,
