@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/onboarding.dart';
+import 'screens/sign_up.dart';
 import 'screens/splash.dart';
 
 void main() {
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(),
+        '/': (context) => SignUpScreen(),
         '/onboarding': (context) => OnboardingScreen(),
+        '/signup': (context) => SignUpScreen(),
       },
     );
   }

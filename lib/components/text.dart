@@ -6,6 +6,8 @@ class TextStyles {
   Color? textcolor;
    late final TextStyle headline1;
    late final TextStyle bodytext1;
+   late final TextStyle bodytext2;
+   late final TextStyle bodytext3;
    TextStyles.withColor({this.textcolor}) {
      headline1 = GoogleFonts.notoSans(
        color: textcolor,
@@ -19,16 +21,32 @@ class TextStyles {
       color: textcolor,
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      letterSpacing: .12,
-      wordSpacing: 2,
+      letterSpacing: 1.2,
+      //wordSpacing: 2,
       height: 1.50
-   );
+    );
+    bodytext2 = GoogleFonts.notoSans(
+      color: textcolor,
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+      letterSpacing: 1.2,
+      //wordSpacing: 2,
+      height: 1.50
+    );
+    bodytext3 = GoogleFonts.notoSans(
+      color: textcolor,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.2,
+      //wordSpacing: 2,
+      height: 1.50
+    );
    }
    static var buttontext1 = GoogleFonts.notoSans(
     color: Colors.white,
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    letterSpacing: .12,
+    letterSpacing: 1.2,
     wordSpacing: 2,
     height: 1.50
    );
@@ -36,7 +54,7 @@ class TextStyles {
     color: AppColors.purpleplum,
     fontSize: 12,
     fontWeight: FontWeight.w600,
-    letterSpacing: .12,
+    letterSpacing: 1.2,
     wordSpacing: 2,
     height: 1.50
    );

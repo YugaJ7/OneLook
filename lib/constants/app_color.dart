@@ -7,5 +7,8 @@ class AppColors {
   static const voilet = Color(0xFFA1A3F6);
   static const lightvoilet = Color(0xFFD0D1FF);
   static const purpleplum = Color(0xFF585CE5);
+  static const lilac = Color(0xFFFAFAFF);
   static const lilacdark = Color(0xFFF0F1F9);
+  static const darkgrey = Color(0xFF898D9E);
+  static const lightgrey = Color(0xFFE5E6EE);
 }

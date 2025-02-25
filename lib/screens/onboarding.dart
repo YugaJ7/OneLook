@@ -39,6 +39,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeOut,
       );
     }
+    else {
+      Navigator.pushNamed(context, '/signup');
+    }
   }
 
   @override
@@ -104,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: SmallOutlinedButton(
               text: 'Skip Intro',
               onPressed: () {
-                
+                Navigator.pushNamed(context, '/signup');
               },
               textStyle: TextStyles.buttontext2,
               buttonStyle: ButtonStyles.smallprimary,
