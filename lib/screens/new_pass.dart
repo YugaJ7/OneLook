@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:onelook/components/button.dart';
 import 'package:onelook/components/elevated_button.dart';
-import 'package:onelook/components/widgets/text_field.dart';
 
 import '../components/text.dart';
-import '../components/widgets/social_button.dart';
 import '../constants/app_color.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class NewPassScreen extends StatefulWidget {
+  const NewPassScreen({super.key});
 
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _NewPassScreenState createState() => _NewPassScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _NewPassScreenState extends State<NewPassScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool hasMinLength = false;
   bool hasUpperLower = false;
@@ -63,21 +61,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             SizedBox(height: 40),
             Center(
-              child: Text("Create an account",
+              child: Text("Enter a new password",
                   style: TextStyles.withColor(textcolor: AppColors.deepblue)
                       .headline1),
             ),
             SizedBox(height: 20),
-            AuthTextField(
-                label: "Full Name",
-                hint: "Enter your name",
-                icon: 'assets/login_sign/profile.png'),
-            SizedBox(height: 12),
-            AuthTextField(
-                label: "E-mail",
-                hint: "Enter your e-mail here",
-                icon: 'assets/login_sign/email.png'),
-            SizedBox(height: 12),
             Text("Password",
                 style: TextStyles.withColor(textcolor: AppColors.darkgrey)
                     .bodytext2),
@@ -130,92 +118,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 8),
             _buildValidationRow(
                 "At least one number or symbol", hasNumberOrSymbol),
-            SizedBox(height: 20),
-            Divider(color: AppColors.lightgrey, thickness: 1.5),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Checkbox(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  side: BorderSide(color: AppColors.darkgrey),
-                  checkColor: AppColors.purpleplum,
-                  value: isChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                      _updateButtonState();
-                    });
-                  },
-                ),
-                Expanded(
-                    child: Text(
-                        "By continuing you accept our Privacy Policy and Term of Use",
-                        style:
-                            TextStyles.withColor(textcolor: AppColors.darkgrey)
-                                .bodytext3))
-              ],
-            ),
-            SizedBox(height: 20),
+            Spacer(),
             SizedBox(
               height: 60,
               width: double.infinity,
               child: CustomElevatedButton(
-                text: 'Sign Up',
+                text: 'Confirm',
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
-                onPressed: () {},
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text("Or",
-                      style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                          .bodytext3),
-                ),
-                Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SocialButton(assetPath: "assets/login_sign/google.png"),
-                SizedBox(width: 50),
-                SocialButton(
-                  assetPath: "assets/login_sign/facebook.png",
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/confirm');
                 },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Already have an account? ",
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .bodytext3,
-                    children: [
-                      TextSpan(
-                        text: "Login",
-                        style: TextStyles.withColor(
-                                textcolor: AppColors.purpleplum)
-                            .bodytext3,
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ),
+            SizedBox(height: 40),
           ],
         ),
       ),
@@ -232,6 +148,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
             style:
                 TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext3),
       ],
+    );
+  }
+}
+
+class ConfirmScreen extends StatefulWidget {
+  const ConfirmScreen({super.key});
+
+  @override
+  _ConfirmScreenState createState() => _ConfirmScreenState();
+}
+
+class _ConfirmScreenState extends State<ConfirmScreen> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 40),
+            Row(
+              children: [
+                SvgPicture.asset('assets/logosmall.svg'),
+                SizedBox(width: 10),
+                Text('OneLook',
+                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                        .headline1),
+              ],
+            ),
+            SizedBox(height: 40),
+            Center(child: SvgPicture.asset('assets/login_sign/password.svg')),
+            SizedBox(height: 40),
+            Center(
+              child: Text("Your password has been changed",
+                  style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                      .headline2,textAlign: TextAlign.center,),
+            ),
+            Spacer(),
+            SizedBox(
+              height: 60,
+              width: double.infinity,
+              child: CustomElevatedButton(
+                text: 'Log in',
+                buttonStyle: ButtonStyles.buttonprimary,
+                textStyle: TextStyles.buttontext1,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+              ),
+            ),
+            SizedBox(height: 40),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,45 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:onelook/components/button.dart';
 import 'package:onelook/components/elevated_button.dart';
+import 'package:onelook/components/widgets/social_button.dart';
 import 'package:onelook/components/widgets/text_field.dart';
 
 import '../components/text.dart';
-import '../components/widgets/social_button.dart';
 import '../constants/app_color.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
-  bool hasMinLength = false;
-  bool hasUpperLower = false;
-  bool hasNumberOrSymbol = false;
-  bool isButtonEnabled = false;
-  bool isChecked = false;
   bool _obscureText = true;
-
-  void _validatePassword(String password) {
-    setState(() {
-      hasMinLength = password.length >= 8;
-      hasUpperLower = RegExp(r'(?=.*[a-z])(?=.*[A-Z])').hasMatch(password);
-      hasNumberOrSymbol =
-          RegExp(r'(?=.*\d)|(?=.*[!@#\$%^&*(),.?":{}|<>])').hasMatch(password);
-      _updateButtonState();
-    });
-  }
-
-  void _updateButtonState() {
-    setState(() {
-      isButtonEnabled =
-          hasMinLength && hasUpperLower && hasNumberOrSymbol && isChecked;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +41,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             SizedBox(height: 40),
             Center(
-              child: Text("Create an account",
-                  style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                      .headline1),
-            ),
+                child: Text("Welcome back",
+                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                        .headline1)),
             SizedBox(height: 20),
             AuthTextField(
-                label: "Full Name",
-                hint: "Enter your name",
-                icon: 'assets/login_sign/profile.png'),
-            SizedBox(height: 12),
-            AuthTextField(
-                label: "E-mail",
-                hint: "Enter your e-mail here",
-                icon: 'assets/login_sign/email.png'),
-            SizedBox(height: 12),
+              label: 'E-mail',
+              hint: 'Enter your e-mail here',
+              icon: 'assets/login_sign/email.png',
+            ),
+            SizedBox(height: 20),
             Text("Password",
                 style: TextStyles.withColor(textcolor: AppColors.darkgrey)
                     .bodytext2),
@@ -88,7 +61,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
               controller: _passwordController,
               obscureText: _obscureText,
-              onChanged: _validatePassword,
               decoration: InputDecoration(
                 hintText: "Place the password here",
                 hintStyle: TextStyles.withColor(textcolor: AppColors.darkgrey)
@@ -122,46 +94,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(14)),
               ),
             ),
-            SizedBox(height: 10),
-            _buildValidationRow("At least 8 characters", hasMinLength),
-            SizedBox(height: 8),
-            _buildValidationRow(
-                "Both uppercase and lowercase characters", hasUpperLower),
-            SizedBox(height: 8),
-            _buildValidationRow(
-                "At least one number or symbol", hasNumberOrSymbol),
             SizedBox(height: 20),
-            Divider(color: AppColors.lightgrey, thickness: 1.5),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Checkbox(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  side: BorderSide(color: AppColors.darkgrey),
-                  checkColor: AppColors.purpleplum,
-                  value: isChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                      _updateButtonState();
-                    });
-                  },
-                ),
-                Expanded(
-                    child: Text(
-                        "By continuing you accept our Privacy Policy and Term of Use",
-                        style:
-                            TextStyles.withColor(textcolor: AppColors.darkgrey)
-                                .bodytext3))
-              ],
-            ),
-            SizedBox(height: 20),
+            Center(
+                child: TextButton(onPressed: (){
+                  Navigator.pushNamed(context, '/forgotpassword');
+                }, child: Text('Forgot your password?',
+                    style: TextStyles.withColor(textcolor: AppColors.purpleplum)
+                        .bodytext3))),
+            Spacer(),
             SizedBox(
               height: 60,
               width: double.infinity,
               child: CustomElevatedButton(
-                text: 'Sign Up',
+                text: 'Log in',
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
                 onPressed: () {},
@@ -186,27 +131,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SocialButton(assetPath: "assets/login_sign/google.png"),
+                SocialButton(assetPath: 'assets/login_sign/google.png'),
                 SizedBox(width: 50),
-                SocialButton(
-                  assetPath: "assets/login_sign/facebook.png",
-                ),
+                SocialButton(assetPath: 'assets/login_sign/facebook.png'),
               ],
             ),
             SizedBox(height: 20),
             Center(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: "Already have an account? ",
+                    text: "Don't have an account yet? ",
                     style: TextStyles.withColor(textcolor: AppColors.deepblue)
                         .bodytext3,
                     children: [
                       TextSpan(
-                        text: "Login",
+                        text: "Sign up",
                         style: TextStyles.withColor(
                                 textcolor: AppColors.purpleplum)
                             .bodytext3,
@@ -219,19 +162,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildValidationRow(String text, bool isValid) {
-    return Row(
-      children: [
-        Icon(isValid ? Icons.check : Icons.close,
-            color: isValid ? Colors.green : Colors.red),
-        SizedBox(width: 8),
-        Text(text,
-            style:
-                TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext3),
-      ],
     );
   }
 }

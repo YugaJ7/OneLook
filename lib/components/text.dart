@@ -5,6 +5,7 @@ import 'package:onelook/constants/app_color.dart';
 class TextStyles {
   Color? textcolor;
    late final TextStyle headline1;
+   late final TextStyle headline2;
    late final TextStyle bodytext1;
    late final TextStyle bodytext2;
    late final TextStyle bodytext3;
@@ -14,6 +15,14 @@ class TextStyles {
        fontSize: 30,
        fontWeight: FontWeight.bold,
        letterSpacing: .2,
+       wordSpacing: 2,
+       height: 1.30
+     );
+     headline2 = GoogleFonts.notoSans(
+       color: textcolor,
+       fontSize: 20,
+       fontWeight: FontWeight.bold,
+       letterSpacing: 1.2,
        wordSpacing: 2,
        height: 1.30
      );
