@@ -117,7 +117,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'Log in',
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(context, '/navbar', (route) => false);
+                },
               ),
             ),
             SizedBox(height: 20),

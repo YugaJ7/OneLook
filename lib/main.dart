@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onelook/components/navbar.dart';
 import 'package:onelook/screens/forgot.dart';
 import 'package:onelook/screens/login.dart';
 import 'package:onelook/screens/new_pass.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/forgotpassword': (context) => ForgotScreen(),
         '/newpassword': (context) => NewPassScreen(),
         '/confirm': (context) => ConfirmScreen(),
+        '/navbar': (context) => Navbar(),
       },
     );
   }

@@ -163,7 +163,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 text: 'Sign Up',
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(context, '/navbar', (route) => false);
+                },
               ),
             ),
             SizedBox(height: 20),

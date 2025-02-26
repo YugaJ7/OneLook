@@ -11,4 +11,5 @@ class AppColors {
   static const lilacdark = Color(0xFFF0F1F9);
   static const darkgrey = Color(0xFF898D9E);
   static const lightgrey = Color(0xFFE5E6EE);
+  static const dustgrey = Color(0xFFB0B2C3);
 }

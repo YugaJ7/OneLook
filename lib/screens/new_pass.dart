@@ -198,7 +198,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context, '/navbar', (route) => false);
                 },
               ),
             ),
