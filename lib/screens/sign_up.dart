@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:onelook/components/button.dart';
 import 'package:onelook/components/elevated_button.dart';
 import 'package:onelook/components/widgets/text_field.dart';
@@ -52,16 +51,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40),
-            Row(
-              children: [
-                SvgPicture.asset('assets/logosmall.svg'),
-                SizedBox(width: 10),
-                Text('OneLook',
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .headline1),
-              ],
-            ),
-            SizedBox(height: 40),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset('assets/logosmall.svg'),
+            //     SizedBox(width: 10),
+            //     Text('OneLook',
+            //         style: TextStyles.withColor(textcolor: AppColors.deepblue)
+            //             .headline1),
+            //   ],
+            // ),
+            SizedBox(height: 20),
             Center(
               child: Text("Create an account",
                   style: TextStyles.withColor(textcolor: AppColors.deepblue)
@@ -194,28 +193,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
             SizedBox(height: 20),
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Already have an account? ",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already have an account? ",
                     style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .bodytext3,
-                    children: [
-                      TextSpan(
-                        text: "Login",
-                        style: TextStyles.withColor(
-                                textcolor: AppColors.purpleplum)
+                        .bodytext3),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/login');
+                  },
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero, 
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      foregroundColor: Colors.transparent,
+                      backgroundColor: Colors.transparent),
+                  child: Text(
+                    "Log in",
+                    style:
+                        TextStyles.withColor(textcolor: AppColors.purpleplum)
                             .bodytext3,
-                      ),
-                    ],
                   ),
                 ),
-              ),
+              ],
             ),
+            SizedBox(height: 45),
           ],
         ),
       ),

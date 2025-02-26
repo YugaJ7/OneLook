@@ -50,16 +50,16 @@ class _NewPassScreenState extends State<NewPassScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40),
-            Row(
-              children: [
-                SvgPicture.asset('assets/logosmall.svg'),
-                SizedBox(width: 10),
-                Text('OneLook',
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .headline1),
-              ],
-            ),
-            SizedBox(height: 40),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset('assets/logosmall.svg'),
+            //     SizedBox(width: 10),
+            //     Text('OneLook',
+            //         style: TextStyles.withColor(textcolor: AppColors.deepblue)
+            //             .headline1),
+            //   ],
+            // ),
+            SizedBox(height: 20),
             Center(
               child: Text("Enter a new password",
                   style: TextStyles.withColor(textcolor: AppColors.deepblue)
@@ -127,7 +127,7 @@ class _NewPassScreenState extends State<NewPassScreen> {
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/confirm');
+                  Navigator.pushNamedAndRemoveUntil(context, '/confirm',(route) => false);
                 },
               ),
             ),
@@ -171,17 +171,17 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
-            Row(
-              children: [
-                SvgPicture.asset('assets/logosmall.svg'),
-                SizedBox(width: 10),
-                Text('OneLook',
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .headline1),
-              ],
-            ),
-            SizedBox(height: 40),
+            // SizedBox(height: 40),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset('assets/logosmall.svg'),
+            //     SizedBox(width: 10),
+            //     Text('OneLook',
+            //         style: TextStyles.withColor(textcolor: AppColors.deepblue)
+            //             .headline1),
+            //   ],
+            // ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
             Center(child: SvgPicture.asset('assets/login_sign/password.svg')),
             SizedBox(height: 40),
             Center(
@@ -198,7 +198,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                 buttonStyle: ButtonStyles.buttonprimary,
                 textStyle: TextStyles.buttontext1,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                 },
               ),
             ),

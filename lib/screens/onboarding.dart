@@ -40,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     }
     else {
-      Navigator.pushNamed(context, '/signup');
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
@@ -107,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: SmallOutlinedButton(
               text: 'Skip Intro',
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.pushReplacementNamed(context, '/login');
               },
               textStyle: TextStyles.buttontext2,
               buttonStyle: ButtonStyles.smallprimary,

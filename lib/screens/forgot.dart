@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:onelook/components/button.dart';
 import 'package:onelook/components/elevated_button.dart';
 import 'package:onelook/components/widgets/text_field.dart';
@@ -26,22 +25,22 @@ class _ForgotScreenState extends State<ForgotScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40),
-            Row(
-              children: [
-                SvgPicture.asset('assets/logosmall.svg'),
-                SizedBox(width: 10),
-                Text('OneLook',
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .headline1),
-              ],
-            ),
-            SizedBox(height: 40),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset('assets/logosmall.svg'),
+            //     SizedBox(width: 10),
+            //     Text('OneLook',
+            //         style: TextStyles.withColor(textcolor: AppColors.deepblue)
+            //             .headline1),
+            //   ],
+            // ),
+            SizedBox(height: 20),
             Center(
                 child: Text("Enter your e-mail",
                     style: TextStyles.withColor(textcolor: AppColors.deepblue)
                         .headline1)),
             SizedBox(height: 20),
-            Text('You will receive a link to confirm the password change to the e-mail address provided', style: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2),
+            Text('You will receive a link to confirm the password change to the e-mail address provided', style: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,textAlign: TextAlign.center,),
             SizedBox(height: 20),
             AuthTextField(
               label: 'E-mail',

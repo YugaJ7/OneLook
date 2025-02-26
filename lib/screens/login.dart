@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:onelook/components/button.dart';
 import 'package:onelook/components/elevated_button.dart';
 import 'package:onelook/components/widgets/social_button.dart';
@@ -22,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -30,16 +30,16 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40),
-            Row(
-              children: [
-                SvgPicture.asset('assets/logosmall.svg'),
-                SizedBox(width: 10),
-                Text('OneLook',
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .headline1),
-              ],
-            ),
-            SizedBox(height: 40),
+            // Row(
+            //   children: [
+            //     SvgPicture.asset('assets/logosmall.svg'),
+            //     SizedBox(width: 10),
+            //     Text('OneLook',
+            //         style: TextStyles.withColor(textcolor: AppColors.deepblue)
+            //             .headline1),
+            //   ],
+            // ),
+            SizedBox(height: 20),
             Center(
                 child: Text("Welcome back",
                     style: TextStyles.withColor(textcolor: AppColors.deepblue)
@@ -63,8 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: _obscureText,
               decoration: InputDecoration(
                 hintText: "Place the password here",
-                hintStyle: TextStyles.withColor(textcolor: AppColors.darkgrey)
-                    .bodytext2,
+                hintStyle: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
                 prefixIcon: Image.asset(
                   'assets/login_sign/locked.png',
                   scale: 3,
@@ -96,11 +95,20 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 20),
             Center(
-                child: TextButton(onPressed: (){
-                  Navigator.pushNamed(context, '/forgotpassword');
-                }, child: Text('Forgot your password?',
-                    style: TextStyles.withColor(textcolor: AppColors.purpleplum)
-                        .bodytext3))),
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        foregroundColor: Colors.transparent,
+                        backgroundColor: Colors.transparent),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/forgotpassword');
+                    },
+                    child: Text('Forgot your password?',
+                        style: TextStyles.withColor(
+                                textcolor: AppColors.purpleplum)
+                            .bodytext3))),
             Spacer(),
             SizedBox(
               height: 60,
@@ -137,28 +145,32 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             SizedBox(height: 20),
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Don't have an account yet? ",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account yet? ",
                     style: TextStyles.withColor(textcolor: AppColors.deepblue)
-                        .bodytext3,
-                    children: [
-                      TextSpan(
-                        text: "Sign up",
-                        style: TextStyles.withColor(
-                                textcolor: AppColors.purpleplum)
+                        .bodytext3),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/signup');
+                  },
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero, 
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      foregroundColor: Colors.transparent,
+                      backgroundColor: Colors.transparent),
+                  child: Text(
+                    "Sign up",
+                    style:
+                        TextStyles.withColor(textcolor: AppColors.purpleplum)
                             .bodytext3,
-                      ),
-                    ],
                   ),
                 ),
-              ),
+              ],
             ),
+            SizedBox(height: 45),
           ],
         ),
       ),
