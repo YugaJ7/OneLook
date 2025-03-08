@@ -17,18 +17,26 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: buttonStyle,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Spacer(),
-          Text(
+      child: Container(
+        width: double.infinity, 
+        child: Stack(
+          alignment: Alignment.center, 
+          children: [
+            Text(
             text,
             style: textStyle
           ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-          Image.asset('assets/arrowright.png'),
-        ],
-      )
+            Positioned(
+              right: 0, 
+              child: Image.asset(
+                'assets/arrowright.png', 
+                width: 24,
+                height: 24,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

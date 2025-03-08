@@ -15,7 +15,7 @@ class ButtonStyles {
       width: 1
       )
     ),
-    elevation: 0
+    elevation: 5
   );
 
   static var smallprimary = OutlinedButton.styleFrom(

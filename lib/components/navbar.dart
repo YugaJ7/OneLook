@@ -15,7 +15,7 @@ class Navbar extends StatefulWidget {
 
 class _NavbarState extends State<Navbar> {
   int _selectedIndex = 0;
-  double _circlePosition = 33;
+  double _circlePosition = 0;
 
   final List<Widget> _screens = [
     const HomeScreen(),
@@ -38,20 +38,17 @@ class _NavbarState extends State<Navbar> {
   ];
 
   void _onItemTapped(int index) {
-  setState(() {
-    _circlePosition = (index * 98) + 33;
-  });
-
-  Future.delayed(Duration(milliseconds: 200), () {
     setState(() {
-      _selectedIndex = index; 
+      _selectedIndex = index;
     });
-  });
-}
-
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final iconContainerWidth = screenWidth / _icons.length;
+    _circlePosition = (_selectedIndex * iconContainerWidth) + (iconContainerWidth / 2) - 25;
+
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
@@ -90,10 +87,13 @@ class _NavbarState extends State<Navbar> {
                 return GestureDetector(
                   onTap: () => _onItemTapped(index),
                   child: Container(
-                    width: 80,
+                    width: iconContainerWidth,
                     height: 80,
                     alignment: Alignment.center,
-                    child: Image.asset(_selectedIndex!=index? _icons[index]:_filledicons[index],scale: 3.5),
+                    child: Image.asset(
+                      _selectedIndex != index ? _icons[index] : _filledicons[index],
+                      scale: 3.5,
+                    ),
                   ),
                 );
               }),
