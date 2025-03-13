@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:onelook/components/navbar.dart';
-import 'package:onelook/screens/forgot.dart';
+import 'package:get/get.dart';
+import 'package:onelook/screens/splash.dart';
+import 'package:onelook/screens/onboarding.dart';
+import 'package:onelook/screens/sign_up.dart';
 import 'package:onelook/screens/login.dart';
+import 'package:onelook/screens/forgot.dart';
 import 'package:onelook/screens/new_pass.dart';
+import 'package:onelook/components/navbar.dart';
 
-import 'screens/onboarding.dart';
-import 'screens/sign_up.dart';
-import 'screens/splash.dart';
-
+import 'binding/all_binding.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -17,19 +18,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/onboarding': (context) => OnboardingScreen(),
-        '/signup': (context) => SignUpScreen(),
-        '/login': (context) => LoginScreen(),
-        '/forgotpassword': (context) => ForgotScreen(),
-        '/newpassword': (context) => NewPassScreen(),
-        '/confirm': (context) => ConfirmScreen(),
-        '/navbar': (context) => Navbar(),
-      },
+      getPages: [
+        GetPage(name: '/', page: () => SplashScreen(), binding: SplashBinding()),
+        GetPage(name: '/onboarding', page: () => OnboardingScreen(), binding: OnboardingBinding()),
+        GetPage(name: '/signup', page: () => SignUpScreen(), binding: SignUpBinding()),
+        GetPage(name: '/login', page: () => LoginScreen(), binding: LoginBinding()),
+        GetPage(name: '/forgotpassword', page: () => ForgotScreen(), binding: ForgotBinding()),
+        GetPage(name: '/newpassword', page: () => NewPassScreen()),
+        GetPage(name: '/confirm', page: () => ConfirmScreen()),
+        GetPage(name: '/navbar', page: () => Navbar()),
+      ],
     );
   }
 }

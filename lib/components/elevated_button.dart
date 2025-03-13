@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final TextStyle? textStyle;
   final ButtonStyle? buttonStyle;
-  const CustomElevatedButton({super.key, 
+
+  const CustomElevatedButton({
+    super.key,
     required this.text,
     required this.onPressed,
     required this.textStyle,
@@ -18,18 +20,18 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: buttonStyle,
       child: Container(
-        width: double.infinity, 
+        width: double.infinity,
         child: Stack(
-          alignment: Alignment.center, 
+          alignment: Alignment.center,
           children: [
             Text(
-            text,
-            style: textStyle
-          ),
+              text,
+              style: textStyle,
+            ),
             Positioned(
-              right: 0, 
+              right: 0,
               child: Image.asset(
-                'assets/arrowright.png', 
+                'assets/arrowright.png',
                 width: 24,
                 height: 24,
               ),
