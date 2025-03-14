@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:onelook/screens/activity.dart';
-import 'package:onelook/screens/home.dart';
-import 'package:onelook/screens/progress.dart';
-import 'package:onelook/screens/setting.dart';
+import 'package:onelook/screens/activity/activity.dart';
+import 'package:onelook/screens/home/home.dart';
+import 'package:onelook/screens/progress/progress.dart';
+import 'package:onelook/screens/settings/setting.dart';
 
 class NavbarData {
   // List of screens

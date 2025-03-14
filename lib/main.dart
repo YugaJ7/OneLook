@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onelook/screens/splash.dart';
-import 'package:onelook/screens/onboarding.dart';
-import 'package:onelook/screens/sign_up.dart';
-import 'package:onelook/screens/login.dart';
-import 'package:onelook/screens/forgot.dart';
-import 'package:onelook/screens/new_pass.dart';
+import 'package:onelook/screens/auth/splash.dart';
+import 'package:onelook/screens/auth/onboarding.dart';
+import 'package:onelook/screens/auth/sign_up.dart';
+import 'package:onelook/screens/auth/login.dart';
+import 'package:onelook/screens/auth/forgot.dart';
+import 'package:onelook/screens/auth/new_pass.dart';
 import 'package:onelook/components/navbar/navbar.dart';
 import 'binding/all_binding.dart';
 void main() {

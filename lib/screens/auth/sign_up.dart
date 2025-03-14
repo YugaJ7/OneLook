@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/widgets/buttons/elevated_button.dart';
 import 'package:onelook/components/widgets/textfield/text_field.dart';
-import '../components/style/text.dart';
-import '../components/widgets/buttons/social_button.dart';
-import '../constants/app_color.dart';
-import '../controllers/sign_up_controller.dart';
+import '../../components/style/text.dart';
+import '../../components/widgets/buttons/social_button.dart';
+import '../../constants/app_color.dart';
+import '../../controllers/sign_up_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
   final SignUpController controller = Get.put(SignUpController());
