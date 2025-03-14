@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../components/button.dart';
-import '../components/elevated_button.dart';
+import '../components/style/button.dart';
+import '../components/widgets/buttons/elevated_button.dart';
 import '../controllers/newpass_controller.dart';
-import '../components/text.dart';
+import '../components/style/text.dart';
 import '../constants/app_color.dart';
 
 class NewPassScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class NewPassScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.075),
             Center(
               child: Text(
                 "Enter a new password",
@@ -36,45 +36,42 @@ class NewPassScreen extends StatelessWidget {
                   TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
             ),
             SizedBox(height: 4),
-            TextField(
-              cursorColor: AppColors.darkgrey,
-              style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
-              controller: controller.passwordController,
-              obscureText: controller.obscureText.value,
-              onChanged: controller.validatePassword,
-              decoration: InputDecoration(
-                hintText: "Place the password here",
-                hintStyle: TextStyles.withColor(textcolor: AppColors.darkgrey)
-                    .bodytext2,
-                prefixIcon: Image.asset(
-                  'assets/login_sign/locked.png',
-                  scale: 3,
-                ),
-                suffixIcon: Obx(() => IconButton(
+            Obx(() => TextField(
+                  cursorColor: AppColors.darkgrey,
+                  style: TextStyles.withColor(textcolor: AppColors.darkgrey)
+                      .bodytext2,
+                  controller: controller.passwordController,
+                  obscureText: controller.obscureText.value,
+                  onChanged: (value) => controller.validatePassword(value),
+                  decoration: InputDecoration(
+                    hintText: "Place the password here",
+                    hintStyle:
+                        TextStyles.withColor(textcolor: AppColors.darkgrey)
+                            .bodytext2,
+                    prefixIcon: Image.asset(
+                      'assets/login_sign/locked.png',
+                      scale: 3,
+                    ),
+                    suffixIcon: IconButton(
                       color: AppColors.darkgrey,
                       icon: Icon(controller.obscureText.value
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined),
                       onPressed: controller.toggleObscureText,
-                    )),
-                focusColor: AppColors.lilac,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.lilacdark),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.lilacdark),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                fillColor: AppColors.lilac,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.lilacdark),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-              ),
-            ),
+                    ),
+                    focusColor: AppColors.lilac,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    fillColor: AppColors.lilac,
+                    filled: true,
+                  ),
+                )),
             SizedBox(height: 10),
 
             _buildValidationRow(

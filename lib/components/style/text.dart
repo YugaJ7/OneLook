@@ -6,6 +6,7 @@ class TextStyles {
   Color? textcolor;
    late final TextStyle headline1;
    late final TextStyle headline2;
+   late final TextStyle headline3;
    late final TextStyle bodytext1;
    late final TextStyle bodytext2;
    late final TextStyle bodytext3;
@@ -25,6 +26,14 @@ class TextStyles {
        letterSpacing: 1.2,
        wordSpacing: 2,
        height: 1.30
+     );
+     headline3 = GoogleFonts.notoSans(
+       color: textcolor,
+       fontSize: 16,
+       fontWeight: FontWeight.bold,
+       letterSpacing: 0,
+       wordSpacing: 2,
+       height: 1.50
      );
      bodytext1 = GoogleFonts.notoSans(
       color: textcolor,

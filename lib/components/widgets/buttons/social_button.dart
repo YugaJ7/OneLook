@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_color.dart';
+import '../../../constants/app_color.dart';
 
 class SocialButton extends StatelessWidget {
   final String assetPath;

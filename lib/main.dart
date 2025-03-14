@@ -6,8 +6,7 @@ import 'package:onelook/screens/sign_up.dart';
 import 'package:onelook/screens/login.dart';
 import 'package:onelook/screens/forgot.dart';
 import 'package:onelook/screens/new_pass.dart';
-import 'package:onelook/components/navbar.dart';
-
+import 'package:onelook/components/navbar/navbar.dart';
 import 'binding/all_binding.dart';
 void main() {
   runApp(const MyApp());

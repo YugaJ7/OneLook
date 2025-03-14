@@ -12,7 +12,7 @@ class SignUpController extends GetxController {
   var hasNumberOrSymbol = false.obs;
   var isChecked = false.obs;
   var isButtonEnabled = false.obs;
-  var isLoading = false.obs; // Reactive boolean for loading state
+  var isLoading = false.obs; 
 
   void toggleObscureText() {
     obscureText.value = !obscureText.value;

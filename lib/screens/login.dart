@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onelook/components/button.dart';
-import 'package:onelook/components/elevated_button.dart';
-import 'package:onelook/components/widgets/social_button.dart';
-import 'package:onelook/components/widgets/text_field.dart';
-import '../components/text.dart';
+import 'package:onelook/components/style/button.dart';
+import 'package:onelook/components/widgets/buttons/elevated_button.dart';
+import 'package:onelook/components/widgets/buttons/social_button.dart';
+import 'package:onelook/components/widgets/textfield/text_field.dart';
+import '../components/style/text.dart';
 import '../constants/app_color.dart';
 import '../controllers/login_controller.dart';
 
@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.075),
             Center(
               child: Text(
                 "Welcome back",

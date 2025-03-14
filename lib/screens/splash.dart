@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:onelook/components/button.dart';
-import 'package:onelook/components/elevated_button.dart';
-import 'package:onelook/components/text.dart';
+import 'package:onelook/components/style/button.dart';
+import 'package:onelook/components/widgets/buttons/elevated_button.dart';
+import 'package:onelook/components/style/text.dart';
 import 'package:onelook/constants/app_color.dart';
 import 'package:onelook/controllers/splash_controller.dart';
 

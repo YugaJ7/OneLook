@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:onelook/components/text.dart';
+import 'package:onelook/components/style/text.dart';
 import 'package:onelook/constants/app_color.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,15 +8,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.lilac,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
+              SizedBox(height: screenHeight*0.044),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
