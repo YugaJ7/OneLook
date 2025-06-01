@@ -10,6 +10,8 @@ import 'package:onelook/controllers/splash_controller.dart';
 class SplashScreen extends StatelessWidget {
   final SplashController controller = Get.find();
 
+  SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

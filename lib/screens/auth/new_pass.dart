@@ -10,6 +10,8 @@ import '../../constants/app_color.dart';
 class NewPassScreen extends StatelessWidget {
   final NewPassController controller = Get.put(NewPassController());
 
+  NewPassScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

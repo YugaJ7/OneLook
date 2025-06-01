@@ -33,16 +33,20 @@ class AuthTextField extends StatelessWidget {
           return TextField(
             controller: controller,
             obscureText: obscureText.value, // Observe obscureText.value
-            style: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+            style:
+                TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
             cursorColor: AppColors.darkgrey,
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+              hintStyle:
+                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
               prefixIcon: Image.asset(icon, scale: 3),
               suffixIcon: toggleObscureText != null
                   ? IconButton(
                       icon: Icon(
-                        obscureText.value ? Icons.visibility_off : Icons.visibility,
+                        obscureText.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                       onPressed: toggleObscureText,
                       color: AppColors.darkgrey,

@@ -15,7 +15,7 @@ class Navbar extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final iconContainerWidth = screenWidth / NavbarData.icons.length;
     return Scaffold(
-      body: Obx(() => NavbarData.screens[controller.selectedIndex.value]), 
+      body: Obx(() => NavbarData.screens[controller.selectedIndex.value]),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(vertical: screenWidth * 0.025),
         decoration: BoxDecoration(
@@ -37,9 +37,10 @@ class Navbar extends StatelessWidget {
         child: Stack(
           children: [
             Obx(() {
-              final circlePosition = (controller.selectedIndex.value * iconContainerWidth) +
-                  (iconContainerWidth / 2) -
-                  25;
+              final circlePosition =
+                  (controller.selectedIndex.value * iconContainerWidth) +
+                      (iconContainerWidth / 2) -
+                      25;
               return AnimatedPositioned(
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
@@ -63,8 +64,8 @@ class Navbar extends StatelessWidget {
                     child: Obx(() {
                       return Image.asset(
                         controller.selectedIndex.value != index
-                            ? NavbarData.icons[index] 
-                            : NavbarData.filledIcons[index], 
+                            ? NavbarData.icons[index]
+                            : NavbarData.filledIcons[index],
                         scale: 3.5,
                       );
                     }),

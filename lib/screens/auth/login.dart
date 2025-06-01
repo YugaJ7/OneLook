@@ -11,6 +11,8 @@ import '../../controllers/login_controller.dart';
 class LoginScreen extends StatelessWidget {
   final LoginController controller = Get.find();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

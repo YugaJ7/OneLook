@@ -10,6 +10,8 @@ import 'package:onelook/components/style/text.dart';
 class OnboardingScreen extends StatelessWidget {
   final OnboardingController controller = Get.find();
 
+  OnboardingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +38,6 @@ class OnboardingScreen extends StatelessWidget {
                 width: 88,
                 child: ElevatedButton(
                   onPressed: controller.nextPage,
-                  child: Image.asset('assets/arrowright.png',
-                      width: 40, height: 40),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -45,6 +45,8 @@ class OnboardingScreen extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                     backgroundColor: AppColors.purpleplum,
                   ),
+                  child: Image.asset('assets/arrowright.png',
+                      width: 40, height: 40),
                 ),
               ),
               SizedBox(height: 20),
@@ -92,6 +94,7 @@ class OnboardingPage extends StatelessWidget {
   final String description;
 
   const OnboardingPage({
+    super.key,
     required this.image,
     required this.title,
     required this.description,

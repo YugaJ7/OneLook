@@ -10,6 +10,8 @@ import '../../controllers/forgot_controller.dart';
 class ForgotScreen extends StatelessWidget {
   final ForgotController controller = Get.find();
 
+  ForgotScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

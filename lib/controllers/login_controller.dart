@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var obscureText = true.obs; 
-  var isLoading = false.obs; 
+  var obscureText = true.obs;
+  var isLoading = false.obs;
 
   void toggleObscureText() {
     obscureText.value = !obscureText.value;
@@ -39,12 +39,12 @@ class LoginController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    }else {
-      isLoading.value = true; 
+    } else {
+      isLoading.value = true;
       // API CALL
-      await Future.delayed(Duration(seconds: 2)); 
-      isLoading.value = false; 
-      Get.offAllNamed('/navbar'); 
+      await Future.delayed(Duration(seconds: 2));
+      isLoading.value = false;
+      Get.offAllNamed('/navbar');
     }
   }
 

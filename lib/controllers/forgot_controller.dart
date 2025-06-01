@@ -16,7 +16,7 @@ class ForgotController extends GetxController {
       );
     } else {
       // Perform email confirmation logic API call
-      Get.toNamed('/newpassword'); 
+      Get.toNamed('/newpassword');
     }
   }
 

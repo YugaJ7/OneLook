@@ -19,7 +19,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: buttonStyle,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Stack(
           alignment: Alignment.center,

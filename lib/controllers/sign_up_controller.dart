@@ -12,7 +12,7 @@ class SignUpController extends GetxController {
   var hasNumberOrSymbol = false.obs;
   var isChecked = false.obs;
   var isButtonEnabled = false.obs;
-  var isLoading = false.obs; 
+  var isLoading = false.obs;
 
   void toggleObscureText() {
     obscureText.value = !obscureText.value;
@@ -21,7 +21,8 @@ class SignUpController extends GetxController {
   void validatePassword(String password) {
     hasMinLength.value = password.length >= 8;
     hasUpperLower.value = RegExp(r'(?=.*[a-z])(?=.*[A-Z])').hasMatch(password);
-    hasNumberOrSymbol.value = RegExp(r'(?=.*\d)|(?=.*[!@#\$%^&*(),.?":{}|<>])').hasMatch(password);
+    hasNumberOrSymbol.value =
+        RegExp(r'(?=.*\d)|(?=.*[!@#\$%^&*(),.?":{}|<>])').hasMatch(password);
     updateButtonState();
   }
 
@@ -44,11 +45,15 @@ class SignUpController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    } else if (!hasMinLength.value || !hasUpperLower.value || !hasNumberOrSymbol.value) {
+    } else if (!hasMinLength.value ||
+        !hasUpperLower.value ||
+        !hasNumberOrSymbol.value) {
       String errorMessage = 'Password must meet the following requirements:\n';
       if (!hasMinLength.value) errorMessage += '- At least 8 characters\n';
-      if (!hasUpperLower.value) errorMessage += '- Both uppercase and lowercase letters\n';
-      if (!hasNumberOrSymbol.value) errorMessage += '- At least one number or symbol';
+      if (!hasUpperLower.value)
+        errorMessage += '- Both uppercase and lowercase letters\n';
+      if (!hasNumberOrSymbol.value)
+        errorMessage += '- At least one number or symbol';
       Get.snackbar(
         'Error',
         errorMessage,
@@ -67,11 +72,11 @@ class SignUpController extends GetxController {
         colorText: Colors.white,
       );
     } else {
-      isLoading.value = true; 
+      isLoading.value = true;
       // API CALL
-      await Future.delayed(Duration(seconds: 2)); 
-      isLoading.value = false; 
-      Get.offAllNamed('/navbar'); 
+      await Future.delayed(Duration(seconds: 2));
+      isLoading.value = false;
+      Get.offAllNamed('/navbar');
     }
   }
 

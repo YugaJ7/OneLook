@@ -5,7 +5,8 @@ class SmallOutlinedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final TextStyle? textStyle;
   final ButtonStyle? buttonStyle;
-  const SmallOutlinedButton({super.key, 
+  const SmallOutlinedButton({
+    super.key,
     required this.text,
     required this.onPressed,
     required this.textStyle,
@@ -17,10 +18,7 @@ class SmallOutlinedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: buttonStyle,
-      child: Text(
-            text,
-            style: textStyle
-          ),
+      child: Text(text, style: textStyle),
     );
   }
 }
