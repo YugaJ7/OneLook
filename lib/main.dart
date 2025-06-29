@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/navbar',
       getPages: [
         GetPage(
             name: '/', page: () => SplashScreen(), binding: SplashBinding()),
