@@ -28,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Create an account",
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline1,
               ),
             ),
@@ -58,12 +58,12 @@ class SignUpScreen extends StatelessWidget {
             Text(
               "Password",
               style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
             ),
             SizedBox(height: 4),
             Obx(() => TextField(
-                  cursorColor: AppColors.darkgrey,
-                  style: TextStyles.withColor(textcolor: AppColors.darkgrey)
+                  cursorColor: AppColors.darkGrey,
+                  style: TextStyles.withColor(textcolor: AppColors.darkGrey)
                       .bodytext2,
                   controller: controller.passwordController,
                   obscureText: controller.obscureText.value,
@@ -71,29 +71,29 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: "Place the password here",
                     hintStyle:
-                        TextStyles.withColor(textcolor: AppColors.darkgrey)
+                        TextStyles.withColor(textcolor: AppColors.darkGrey)
                             .bodytext2,
                     prefixIcon: Image.asset(
                       'assets/login_sign/locked.png',
                       scale: 3,
                     ),
                     suffixIcon: IconButton(
-                      color: AppColors.darkgrey,
+                      color: AppColors.darkGrey,
                       icon: Icon(controller.obscureText.value
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined),
                       onPressed: controller.toggleObscureText,
                     ),
-                    focusColor: AppColors.lilac,
+                    focusColor: AppColors.lilacPetals,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    fillColor: AppColors.lilac,
+                    fillColor: AppColors.lilacPetals,
                     filled: true,
                   ),
                 )),
@@ -112,7 +112,7 @@ class SignUpScreen extends StatelessWidget {
               controller.hasNumberOrSymbol,
             ),
             SizedBox(height: 20),
-            Divider(color: AppColors.lightgrey, thickness: 1.5),
+            Divider(color: AppColors.lightGrey, thickness: 1.5),
             SizedBox(height: 20),
             Row(
               children: [
@@ -120,8 +120,8 @@ class SignUpScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      side: BorderSide(color: AppColors.darkgrey),
-                      checkColor: AppColors.purpleplum,
+                      side: BorderSide(color: AppColors.darkGrey),
+                      checkColor: AppColors.purplePlum,
                       value: controller.isChecked.value,
                       onChanged: (value) {
                         controller.isChecked.value = value ?? false;
@@ -131,7 +131,7 @@ class SignUpScreen extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "By continuing you accept our Privacy Policy and Term of Use",
-                    style: TextStyles.withColor(textcolor: AppColors.darkgrey)
+                    style: TextStyles.withColor(textcolor: AppColors.darkGrey)
                         .bodytext3,
                   ),
                 ),
@@ -155,17 +155,17 @@ class SignUpScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
+                    child: Divider(color: AppColors.lightGrey, thickness: 1.5)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     "Or",
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                    style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                         .bodytext3,
                   ),
                 ),
                 Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
+                    child: Divider(color: AppColors.lightGrey, thickness: 1.5)),
               ],
             ),
             SizedBox(height: 20),
@@ -183,7 +183,7 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Text(
                   "Already have an account? ",
-                  style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                  style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                       .bodytext3,
                 ),
                 TextButton(
@@ -197,7 +197,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   child: Text(
                     "Log in",
-                    style: TextStyles.withColor(textcolor: AppColors.purpleplum)
+                    style: TextStyles.withColor(textcolor: AppColors.purplePlum)
                         .bodytext3,
                   ),
                 ),
@@ -219,7 +219,7 @@ class SignUpScreen extends StatelessWidget {
             Text(
               text,
               style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext3,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext3,
             ),
           ],
         ));

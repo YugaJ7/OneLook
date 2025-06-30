@@ -48,7 +48,7 @@ class Navbar extends StatelessWidget {
                 top: screenWidth * 0.025,
                 child: CircleAvatar(
                   radius: 25,
-                  backgroundColor: AppColors.lightvoilet,
+                  backgroundColor: AppColors.violetLight,
                 ),
               );
             }),

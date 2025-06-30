@@ -42,7 +42,7 @@ class MenuOption extends StatelessWidget {
           ]),
         ),
       ),
-      Divider(color: AppColors.lightgrey, thickness: 1, height: 0),
+      Divider(color: AppColors.lightGrey, thickness: 1, height: 0),
     ]);
   }
 }

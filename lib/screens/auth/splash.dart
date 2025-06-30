@@ -38,16 +38,16 @@ class SplashScreen extends StatelessWidget {
                             children: [
                               Text('Welcome to',
                                   style: TextStyles.withColor(
-                                          textcolor: AppColors.deepblue)
+                                          textcolor: AppColors.deepBlue)
                                       .headline1),
                               Text('OneLook',
                                   style: TextStyles.withColor(
-                                          textcolor: AppColors.deepblue)
+                                          textcolor: AppColors.deepBlue)
                                       .headline1),
                               SizedBox(height: 20),
                               Text('Just take a look and take action!',
                                   style: TextStyles.withColor(
-                                          textcolor: AppColors.coldgrey)
+                                          textcolor: AppColors.coldGrey)
                                       .bodytext1),
                             ],
                           ),

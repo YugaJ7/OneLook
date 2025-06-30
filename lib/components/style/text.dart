@@ -23,7 +23,6 @@ class TextStyles {
         fontSize: 20,
         fontWeight: FontWeight.bold,
         letterSpacing: 1.2,
-        wordSpacing: 2,
         height: 1.30);
     headline3 = GoogleFonts.notoSans(
         color: textcolor,
@@ -50,7 +49,6 @@ class TextStyles {
         color: textcolor,
         fontSize: 12,
         fontWeight: FontWeight.w500,
-        letterSpacing: 1.2,
         //wordSpacing: 2,
         height: 1.50);
   }
@@ -62,7 +60,7 @@ class TextStyles {
       wordSpacing: 2,
       height: 1.50);
   static var buttontext2 = GoogleFonts.notoSans(
-      color: AppColors.purpleplum,
+      color: AppColors.purplePlum,
       fontSize: 12,
       fontWeight: FontWeight.w600,
       letterSpacing: 1.2,

@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Welcome back",
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline1,
               ),
             ),
@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () => Get.toNamed('/forgotpassword'),
                 child: Text(
                   'Forgot your password?',
-                  style: TextStyles.withColor(textcolor: AppColors.purpleplum)
+                  style: TextStyles.withColor(textcolor: AppColors.purplePlum)
                       .bodytext3,
                 ),
               ),
@@ -84,17 +84,17 @@ class LoginScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
+                    child: Divider(color: AppColors.lightGrey, thickness: 1.5)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     "Or",
-                    style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                    style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                         .bodytext3,
                   ),
                 ),
                 Expanded(
-                    child: Divider(color: AppColors.lightgrey, thickness: 1.5)),
+                    child: Divider(color: AppColors.lightGrey, thickness: 1.5)),
               ],
             ),
             SizedBox(height: 20),
@@ -116,14 +116,14 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Text(
                   "Don't have an account yet? ",
-                  style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                  style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                       .bodytext3,
                 ),
                 TextButton(
                   onPressed: () => Get.offNamed('/signup'),
                   child: Text(
                     "Sign up",
-                    style: TextStyles.withColor(textcolor: AppColors.purpleplum)
+                    style: TextStyles.withColor(textcolor: AppColors.purplePlum)
                         .bodytext3,
                   ),
                 ),

@@ -27,7 +27,7 @@ class NewPassScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Enter a new password",
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline1,
               ),
             ),
@@ -35,12 +35,12 @@ class NewPassScreen extends StatelessWidget {
             Text(
               "Password",
               style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
             ),
             SizedBox(height: 4),
             Obx(() => TextField(
-                  cursorColor: AppColors.darkgrey,
-                  style: TextStyles.withColor(textcolor: AppColors.darkgrey)
+                  cursorColor: AppColors.darkGrey,
+                  style: TextStyles.withColor(textcolor: AppColors.darkGrey)
                       .bodytext2,
                   controller: controller.passwordController,
                   obscureText: controller.obscureText.value,
@@ -48,29 +48,29 @@ class NewPassScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: "Place the password here",
                     hintStyle:
-                        TextStyles.withColor(textcolor: AppColors.darkgrey)
+                        TextStyles.withColor(textcolor: AppColors.darkGrey)
                             .bodytext2,
                     prefixIcon: Image.asset(
                       'assets/login_sign/locked.png',
                       scale: 3,
                     ),
                     suffixIcon: IconButton(
-                      color: AppColors.darkgrey,
+                      color: AppColors.darkGrey,
                       icon: Icon(controller.obscureText.value
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined),
                       onPressed: controller.toggleObscureText,
                     ),
-                    focusColor: AppColors.lilac,
+                    focusColor: AppColors.lilacPetals,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.lilacdark),
+                      borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    fillColor: AppColors.lilac,
+                    fillColor: AppColors.lilacPetals,
                     filled: true,
                   ),
                 )),
@@ -117,7 +117,7 @@ class NewPassScreen extends StatelessWidget {
             Text(
               text,
               style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext3,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext3,
             ),
           ],
         ));
@@ -143,7 +143,7 @@ class ConfirmScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Your password has been changed",
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline2,
                 textAlign: TextAlign.center,
               ),

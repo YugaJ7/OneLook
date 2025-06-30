@@ -50,10 +50,12 @@ class SignUpController extends GetxController {
         !hasNumberOrSymbol.value) {
       String errorMessage = 'Password must meet the following requirements:\n';
       if (!hasMinLength.value) errorMessage += '- At least 8 characters\n';
-      if (!hasUpperLower.value)
+      if (!hasUpperLower.value) {
         errorMessage += '- Both uppercase and lowercase letters\n';
-      if (!hasNumberOrSymbol.value)
+      }
+      if (!hasNumberOrSymbol.value) {
         errorMessage += '- At least one number or symbol';
+      }
       Get.snackbar(
         'Error',
         errorMessage,

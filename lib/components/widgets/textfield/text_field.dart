@@ -26,7 +26,7 @@ class AuthTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+          style: TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
         ),
         SizedBox(height: 4),
         Obx(() {
@@ -34,12 +34,12 @@ class AuthTextField extends StatelessWidget {
             controller: controller,
             obscureText: obscureText.value, // Observe obscureText.value
             style:
-                TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
-            cursorColor: AppColors.darkgrey,
+                TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
+            cursorColor: AppColors.darkGrey,
             decoration: InputDecoration(
               hintText: hint,
               hintStyle:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
               prefixIcon: Image.asset(icon, scale: 3),
               suffixIcon: toggleObscureText != null
                   ? IconButton(
@@ -49,19 +49,19 @@ class AuthTextField extends StatelessWidget {
                             : Icons.visibility,
                       ),
                       onPressed: toggleObscureText,
-                      color: AppColors.darkgrey,
+                      color: AppColors.darkGrey,
                     )
                   : null,
-              focusColor: AppColors.lilac,
+              focusColor: AppColors.lilacPetals,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.lilacdark),
+                borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                 borderRadius: BorderRadius.circular(14),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.lilacdark),
+                borderSide: BorderSide(color: AppColors.lilacPetalsDark),
                 borderRadius: BorderRadius.circular(14),
               ),
-              fillColor: AppColors.lilac,
+              fillColor: AppColors.lilacPetals,
               filled: true,
             ),
           );

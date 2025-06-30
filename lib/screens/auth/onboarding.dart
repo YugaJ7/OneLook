@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
-import 'package:onelook/components/widgets/buttons/smalloutlinedbutton.dart';
+import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/constants/app_color.dart';
 import 'package:onelook/controllers/onboarding_controller.dart';
 import 'package:onelook/components/style/text.dart';
@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightvoilet,
+      backgroundColor: AppColors.violetLight,
       body: Stack(
         children: [
           Column(
@@ -43,7 +43,7 @@ class OnboardingScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     padding: EdgeInsets.all(20),
-                    backgroundColor: AppColors.purpleplum,
+                    backgroundColor: AppColors.purplePlum,
                   ),
                   child: Image.asset('assets/arrowright.png',
                       width: 40, height: 40),
@@ -62,8 +62,8 @@ class OnboardingScreen extends StatelessWidget {
                           height: 4.0,
                           decoration: BoxDecoration(
                             color: index <= controller.currentPage.value
-                                ? AppColors.purpleplum
-                                : AppColors.lilacdark,
+                                ? AppColors.purplePlum
+                                : AppColors.lilacPetalsDark,
                             borderRadius: BorderRadius.circular(2.0),
                           ),
                         ),
@@ -75,7 +75,7 @@ class OnboardingScreen extends StatelessWidget {
           Positioned(
             top: 40,
             right: 20,
-            child: SmallOutlinedButton(
+            child: CustomOutlinedButton(
               text: 'Skip Intro',
               onPressed: () => Get.offNamed('/login'),
               textStyle: TextStyles.buttontext2,
@@ -112,14 +112,14 @@ class OnboardingPage extends StatelessWidget {
           Text(
             title,
             style:
-                TextStyles.withColor(textcolor: AppColors.deepblue).headline1,
+                TextStyles.withColor(textcolor: AppColors.deepBlue).headline1,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),
           Text(
             description,
             style:
-                TextStyles.withColor(textcolor: AppColors.coldgrey).bodytext1,
+                TextStyles.withColor(textcolor: AppColors.coldGrey).bodytext1,
             textAlign: TextAlign.center,
           ),
         ],

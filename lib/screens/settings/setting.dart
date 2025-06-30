@@ -11,7 +11,7 @@ class SettingScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: AppColors.lilac,
+        backgroundColor: AppColors.lilacPetals,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
           child: SingleChildScrollView(
@@ -20,44 +20,44 @@ class SettingScreen extends StatelessWidget {
               SizedBox(height: screenHeight * 0.044),
               Text(
                 'Settings',
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline2,
               ),
               SizedBox(height: screenHeight * 0.022),
               MenuOption(
                 text: 'Activity Manager',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/manager.png',
               ),
               MenuOption(
                 text: 'Notification Stettings',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/notification.png',
               ),
               MenuOption(
                 text: 'Personal Data',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/user.png',
               ),
               MenuOption(
                 text: 'Support',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/support.png',
                 suffixIcon: 'assets/settings/link.png',
               ),
               MenuOption(
                 text: 'Contact Us',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/contact.png',
               ),
               MenuOption(
                 text: 'Privacy Policy',
-                textStyle: TextStyles.withColor(textcolor: AppColors.deepblue)
+                textStyle: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline3,
                 prefixIcon: 'assets/settings/policy.png',
                 suffixIcon: 'assets/settings/link.png',

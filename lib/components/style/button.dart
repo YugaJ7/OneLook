@@ -5,16 +5,19 @@ import 'package:onelook/constants/app_color.dart';
 class ButtonStyles {
   static var buttonprimary = ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      backgroundColor: AppColors.purpleplum,
-      shadowColor: AppColors.voilet,
+      backgroundColor: AppColors.purplePlum,
+      shadowColor: AppColors.violet,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: AppColors.purpleplum, width: 1)),
+          side: BorderSide(color: AppColors.purplePlum, width: 1)),
       elevation: 5);
 
   static var smallprimary = OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      //borderRadius: BorderRadius.circular(20),
-      side: BorderSide(color: AppColors.purpleplum, width: 1),
+      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+      side: BorderSide(color: AppColors.purplePlum, width: 1),
       elevation: 0);
 }

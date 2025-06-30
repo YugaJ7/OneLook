@@ -27,7 +27,7 @@ class ForgotScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Enter your e-mail",
-                style: TextStyles.withColor(textcolor: AppColors.deepblue)
+                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                     .headline1,
               ),
             ),
@@ -35,7 +35,7 @@ class ForgotScreen extends StatelessWidget {
             Text(
               'You will receive a link to confirm the password change to the e-mail address provided',
               style:
-                  TextStyles.withColor(textcolor: AppColors.darkgrey).bodytext2,
+                  TextStyles.withColor(textcolor: AppColors.darkGrey).bodytext2,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
