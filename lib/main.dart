@@ -7,6 +7,7 @@ import 'package:onelook/screens/auth/login.dart';
 import 'package:onelook/screens/auth/forgot.dart';
 import 'package:onelook/screens/auth/new_pass.dart';
 import 'package:onelook/components/navbar/navbar.dart';
+import 'package:onelook/screens/home/add_supplement.dart';
 import 'binding/all_binding.dart';
 
 void main() {
@@ -38,6 +39,11 @@ class MyApp extends StatelessWidget {
             name: '/forgotpassword',
             page: () => ForgotScreen(),
             binding: ForgotBinding()),
+        GetPage(
+            name: '/add_supplement',
+            page: () => AddSupplementScreen(),
+            binding: AddSupplementBinding()
+            ),
         GetPage(name: '/newpassword', page: () => NewPassScreen()),
         GetPage(name: '/confirm', page: () => ConfirmScreen()),
         GetPage(name: '/navbar', page: () => Navbar()),

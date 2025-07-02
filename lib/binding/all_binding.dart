@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../controllers/add_supplement.dart';
 import '../controllers/forgot_controller.dart';
 import '../controllers/login_controller.dart';
 import '../controllers/onboarding_controller.dart';
@@ -43,5 +44,13 @@ class ForgotBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ForgotController());
+  }
+}
+
+// add_supplement_binding.dart
+class AddSupplementBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => AddSupplementController());
   }
 }
