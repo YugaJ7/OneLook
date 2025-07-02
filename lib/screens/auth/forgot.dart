@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/widgets/buttons/elevated_button.dart';
-import 'package:onelook/components/widgets/textfield/text_field.dart';
+import 'package:onelook/components/widgets/textfield/auth_text_field.dart';
 import '../../components/style/text.dart';
 import '../../constants/app_color.dart';
 import '../../controllers/forgot_controller.dart';

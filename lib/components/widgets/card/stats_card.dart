@@ -30,7 +30,6 @@ class StatsCard extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           width: screenWidth * 0.31,
-          height: screenHeight * 0.18,
           padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             color: color,

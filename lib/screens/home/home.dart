@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/style/text.dart';
 import 'package:onelook/components/widgets/buttons/outlined_button.dart';
@@ -11,6 +12,39 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> _stats = [
+      {
+        'title': 'Breath Rate',
+        'rate': '12 BrPM',
+        'icon': 'assets/icons/stats_breath.png',
+        'color': AppColors.violetLight,
+      },
+      {
+        'title': 'Heart Rate',
+        'rate': '72 BPM',
+        'icon': 'assets/icons/stats_heart.png',
+        'color': AppColors.waterLight,
+      },
+      {
+        'title': 'Blood Pressure',
+        'rate': '120/80 mmHg',
+        'icon': 'assets/icons/stats_blood.png',
+        'color': AppColors.peachLight,
+      },
+      {
+        'title': 'ECG',
+        'rate': '120/80 mmHg',
+        'icon': 'assets/icons/stats_ecg.png',
+        'color': AppColors.sunnyYellowLight,
+      },
+      {
+        'title': 'Body Temperature',
+        'rate': '37 °C',
+        'icon': 'assets/icons/stats_temp.png',
+        'color': AppColors.babyBlueLight,
+      },
+    ];
+
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -62,52 +96,29 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             // Health Stats Cards
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.only(left: screenWidth * 0.06),
-              child: Row(
-                children: [
-                  StatsCard(
-                    title: 'Breath Rate',
-                    rate: '12 BrPM',
-                    onPressed: () {},
-                    icon: 'assets/icons/stats_breath.png',
-                    color: AppColors.violetLight,
-                  ),
-                  SizedBox(width: screenWidth * 0.04),
-                  StatsCard(
-                    title: 'Heart Rate',
-                    rate: '72 BPM',
-                    onPressed: () {},
-                    icon: 'assets/icons/stats_heart.png',
-                    color: AppColors.waterLight,
-                  ),
-                  SizedBox(width: screenWidth * 0.04),
-                  StatsCard(
-                    title: 'Blood Pressure',
-                    rate: '120/80 mmHg',
-                    onPressed: () {},
-                    icon: 'assets/icons/stats_blood.png',
-                    color: AppColors.peachLight,
-                  ),
-                  SizedBox(width: screenWidth * 0.04),
-                  StatsCard(
-                    title: 'ECG',
-                    rate: '120/80 mmHg',
-                    onPressed: () {},
-                    icon: 'assets/icons/stats_ecg.png',
-                    color: AppColors.sunnyYellowLight,
-                  ),
-                  SizedBox(width: screenWidth * 0.04),
-                  StatsCard(
-                    title: 'Body Temperature',
-                    rate: '37 °C',
-                    onPressed: () {},
-                    icon: 'assets/icons/stats_temp.png',
-                    color: AppColors.babyBlueLight,
-                  ),
-                  SizedBox(width: screenWidth * 0.06),
-                ],
+            SizedBox(
+              height: screenHeight * 0.18, // Set height according to your StatsCard
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(
+                    left: screenWidth * 0.06, right: screenWidth * 0.06),
+                itemCount: _stats.length,
+                itemBuilder: (context, index) {
+                  final stat = _stats[index];
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        right: index == _stats.length - 1
+                            ? 0
+                            : screenWidth * 0.04),
+                    child: StatsCard(
+                      title: stat['title'],
+                      rate: stat['rate'],
+                      onPressed: () {}, // Customize as needed
+                      icon: stat['icon'],
+                      color: stat['color'],
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(height: 16),
@@ -158,9 +169,8 @@ class HomeScreen extends StatelessWidget {
                                           const SizedBox(height: 24),
                                           CustomOutlinedButton(
                                             text: 'Activity',
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
+                                            onPressed: () =>
+                                                Navigator.pop(context),
                                             textStyle:
                                                 TextStyles.buttontext1.copyWith(
                                               color: AppColors.purplePlum,
@@ -177,9 +187,8 @@ class HomeScreen extends StatelessWidget {
                                           const SizedBox(height: 20),
                                           CustomOutlinedButton(
                                             text: 'Supplement',
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
+                                            onPressed: () =>
+                                                Get.offNamed('/add_supplement'),
                                             textStyle:
                                                 TextStyles.buttontext1.copyWith(
                                               color: AppColors.purplePlum,

@@ -42,7 +42,6 @@ class TextStyles {
         color: textcolor,
         fontSize: 14,
         fontWeight: FontWeight.normal,
-        letterSpacing: 1.2,
         //wordSpacing: 2,
         height: 1.50);
     bodytext3 = GoogleFonts.notoSans(
