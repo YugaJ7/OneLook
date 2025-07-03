@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/style/text.dart';
+import 'package:onelook/components/widgets/dropdown/dropdown.dart';
+import 'package:onelook/components/widgets/dropdown/freq_dropdown.dart';
 import 'package:onelook/components/widgets/textfield/text_field.dart';
 import 'package:onelook/constants/app_color.dart';
 import 'package:onelook/controllers/add_supplement.dart';
@@ -21,7 +23,7 @@ class AddSupplementScreen extends StatelessWidget {
       {"icon": "spoon", "label": "Spoon"},
     ];
     return Scaffold(
-      backgroundColor: AppColors.lilacPetals,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -231,25 +233,37 @@ class AddSupplementScreen extends StatelessWidget {
                     SizedBox(height: screenHeight * 0.022),
                     Divider(color: AppColors.lightGrey, thickness: 1.5),
                     SizedBox(height: screenHeight * 0.022),
+                    Text("Frequency",
+                        style:
+                            TextStyles.withColor(textcolor: AppColors.deepBlue)
+                                .headline3),
+                    const SizedBox(height: 8),
+                    FlatStyledDropdown(
+                      options: [
+                        'Everyday',
+                        'Weekdays',
+                        'Every other day',
+                        'Weekends'
+                      ],
+                      initialValue: 'Everyday',
+                      onChanged: (val) {
+                        print('Selected: $val');
+                      },
+                    ),
+                    SizedBox(height: screenHeight * 0.022),
+                    Text("Duration",
+                        style:
+                            TextStyles.withColor(textcolor: AppColors.deepBlue)
+                                .headline3),
+                    const SizedBox(height: 8),
+                    //_dropdown("30 days"),
+                    FinalDropdown(),
                   ],
                 ),
               ),
               //continue from here
-              const Text("Frequency",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF0F2851))),
-              const SizedBox(height: 12),
-              _dropdown("Everyday"),
-              const SizedBox(height: 24),
-              const Text("Duration",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF0F2851))),
-              const SizedBox(height: 12),
-              _dropdown("30 days"),
+
+              
               const SizedBox(height: 32),
               const Text("Time of day",
                   style: TextStyle(
@@ -357,23 +371,6 @@ Widget _formOption(String icon, String label, {bool selected = false}) {
             color: selected ? AppColors.deepBlue : AppColors.darkGrey),
       ),
     ],
-  );
-}
-
-Widget _dropdown(String value) {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    decoration: BoxDecoration(
-      border: Border.all(color: Color(0xFF585CE5)),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: DropdownButtonHideUnderline(
-      child: DropdownButton<String>(
-        value: value,
-        items: [DropdownMenuItem(value: value, child: Text(value))],
-        onChanged: (_) {},
-      ),
-    ),
   );
 }
 
