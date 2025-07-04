@@ -1,191 +1,123 @@
 import 'package:flutter/material.dart';
-import 'package:onelook/components/style/text.dart';
+import 'package:get/get.dart';
 import 'package:onelook/constants/app_color.dart';
+import 'package:onelook/components/style/text.dart';
 
-class FinalDropdown extends StatefulWidget {
-  const FinalDropdown({super.key});
+class CustomDropdown extends StatefulWidget {
+  final String label;
+  final List<String> options;
+  final RxString selected;
+  final void Function(String)? onChanged;
+
+  const CustomDropdown({
+    super.key,
+    required this.label,
+    required this.options,
+    required this.selected,
+    this.onChanged,
+  });
 
   @override
-  State<FinalDropdown> createState() => _FinalDropdownState();
+  State<CustomDropdown> createState() => _CustomDropdownState();
 }
 
-class _FinalDropdownState extends State<FinalDropdown> {
-  final List<String> options = [
-    'Everyday',
-    'Weekdays',
-    'Every other day',
-    'Weekends',
-  ];
+class _CustomDropdownState extends State<CustomDropdown> {
+  var expanded = false.obs;
 
-  final LayerLink _layerLink = LayerLink();
-  OverlayEntry? _overlayEntry;
-  final GlobalKey _key = GlobalKey();
-
-  String selectedValue = 'Everyday';
-
-  void showOverlay() {
-    final renderBox = _key.currentContext!.findRenderObject() as RenderBox;
-    final size = renderBox.size;
-    final offset = renderBox.localToGlobal(Offset.zero);
-
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Stack(
-        children: [
-          // Block background scroll/tap
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: removeOverlay,
-              child: Container(color: Colors.transparent),
-            ),
-          ),
-
-          // Dropdown box
-          Positioned(
-            left: offset.dx,
-            top: offset.dy,
-            width: size.width,
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.lilacPetals,
-                  border: Border.all(color: AppColors.purplePlum),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: options.map((value) {
-                    final isSelected = value == selectedValue;
-                    final isFirst = value == options.first;
-
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() => selectedValue = value);
-                            removeOverlay();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: isSelected
-                                      ? BoxDecoration(
-                                          color: AppColors.violetLight,
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        )
-                                      : const BoxDecoration(),
-                                  child: Text(
-                                    value,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xFF0A1A3D),
-                                    ),
-                                  ),
-                                ),
-                                if (isFirst)
-                                  Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: AppColors.violetLight,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.keyboard_arrow_up,
-                  size: 24,
-                  color: AppColors.deepBlue,
-                ),
-              ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (value != options.last)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Divider(
-                              color: AppColors.violet,
-                              height: 0,
-                              thickness: 1,
-                            ),
-                          ),
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-
-    Overlay.of(context).insert(_overlayEntry!);
-  }
-
-  void removeOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
-
-  @override
-  void dispose() {
-    removeOverlay();
-    super.dispose();
-  }
+  void toggleDropdown() => expanded.toggle();
 
   @override
   Widget build(BuildContext context) {
-    return CompositedTransformTarget(
-      link: _layerLink,
-      child: GestureDetector(
-        key: _key,
-        onTap: () {
-          if (_overlayEntry == null) {
-            showOverlay();
-          } else {
-            removeOverlay();
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.lilacPetals,
-            border: Border.all(color: AppColors.lilacPetalsDark),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                selectedValue,
-                style: TextStyles.withColor(textcolor: AppColors.deepBlue)
-                    .bodytext2,
-              ),
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: _overlayEntry == null ? Colors.transparent : AppColors.violetLight,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  _overlayEntry == null
-                      ? Icons.keyboard_arrow_down
-                      : Icons.keyboard_arrow_up,
-                  size: 24,
-                  color: AppColors.deepBlue,
-                ),
-              ),
-            ],
-          ),
+    return Obx(() {
+      return Container(
+        decoration: BoxDecoration(
+          color: AppColors.lilacPetals,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.purplePlum),
         ),
-      ),
-    );
+        child: Column(
+          children: [
+            if (!expanded.value)
+              InkWell(
+                onTap: toggleDropdown,
+                borderRadius: BorderRadius.circular(14),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(widget.selected.value,
+                          style: TextStyles.withColor(textcolor: AppColors.deepBlue).bodytext2),
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: AppColors.violetLight,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(Icons.keyboard_arrow_down, color: AppColors.deepBlue, size: 24),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            if (expanded.value)
+              ...widget.options.asMap().entries.map((entry) {
+                final index = entry.key;
+                final option = entry.value;
+                final isSelected = widget.selected.value == option;
+
+                return Column(
+                  children: [
+                    if (index != 0)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(height: 0, color: AppColors.violet),
+                      ),
+                    InkWell(
+                      onTap: () {
+                        widget.selected.value = option;
+                        widget.onChanged?.call(option);
+                        expanded.value = false;
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: isSelected
+                                  ? BoxDecoration(
+                                      color: AppColors.violetLight,
+                                      borderRadius: BorderRadius.circular(8),
+                                    )
+                                  : null,
+                              child: Text(
+                                option,
+                                style: TextStyles.withColor(textcolor: AppColors.deepBlue).bodytext2,
+                              ),
+                            ),
+                            if (index == 0)
+                              Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.violetLight,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(Icons.keyboard_arrow_up,
+                                    color: AppColors.deepBlue, size: 24),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+          ],
+        ),
+      );
+    });
   }
 }
