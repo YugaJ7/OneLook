@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 class AddSupplementController extends GetxController {
   final textController = TextEditingController();
   var text = ''.obs;
+  var isReminderBeforeTimeChecked = false.obs;
+  var isReminderAfterTimeChecked = false.obs;
 
   @override
   void onInit() {
@@ -20,4 +22,3 @@ class AddSupplementController extends GetxController {
     super.onClose();
   }
 }
-

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/style/text.dart';
+import 'package:onelook/components/widgets/buttons/elevated_button.dart';
+import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/components/widgets/dropdown/dropdown.dart';
-import 'package:onelook/components/widgets/dropdown/freq_dropdown.dart';
 import 'package:onelook/components/widgets/textfield/text_field.dart';
 import 'package:onelook/constants/app_color.dart';
 import 'package:onelook/controllers/add_supplement.dart';
@@ -15,12 +17,25 @@ class AddSupplementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final supplementForms = [
+    final supplementForm = [
       {"icon": "pill", "label": "Pill"},
       {"icon": "tablet", "label": "Tablet"},
       {"icon": "sachet", "label": "Sachet"},
       {"icon": "drops", "label": "Drops"},
       {"icon": "spoon", "label": "Spoon"},
+    ];
+    final time = [
+      {"icon": "sunrise", "label": "Morning"},
+      {"icon": "afternoon", "label": "Afternoon"},
+      {"icon": "sunset", "label": "Evening"},
+      {"icon": "night", "label": "Night"},
+    ];
+    final meal = [
+      {"label": "Before meal"},
+      {"label": "After meal"},
+      {"label": "With meal"},
+      {"label": "During meal"},
+      {"label": "No meal"},
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -84,12 +99,12 @@ class AddSupplementScreen extends StatelessWidget {
                   shrinkWrap: true,
                   padding: EdgeInsets.only(
                       left: screenWidth * 0.06, right: screenWidth * 0.06),
-                  itemCount: supplementForms.length,
+                  itemCount: supplementForm.length,
                   itemBuilder: (context, index) {
-                    final form = supplementForms[index];
+                    final form = supplementForm[index];
                     return Padding(
                       padding: EdgeInsets.only(
-                          right: index == supplementForms.length - 1 ? 0 : 16),
+                          right: index == supplementForm.length - 1 ? 0 : 16),
                       child: _formOption(
                         form["icon"]!,
                         form["label"]!,
@@ -238,101 +253,210 @@ class AddSupplementScreen extends StatelessWidget {
                             TextStyles.withColor(textcolor: AppColors.deepBlue)
                                 .headline3),
                     const SizedBox(height: 8),
-                    FlatStyledDropdown(
-                      options: [
-                        'Everyday',
-                        'Weekdays',
-                        'Every other day',
-                        'Weekends'
-                      ],
-                      initialValue: 'Everyday',
-                      onChanged: (val) {
-                        print('Selected: $val');
-                      },
-                    ),
+                    // FlatStyledDropdown(
+                    //   options: [
+                    //     'Everyday',
+                    //     'Weekdays',
+                    //     'Every other day',
+                    //     'Weekends'
+                    //   ],
+                    //   initialValue: 'Everyday',
+                    //   onChanged: (val) {
+                    //     print('Selected: $val');
+                    //   },
+                    // ),
+                    FinalDropdown(),
                     SizedBox(height: screenHeight * 0.022),
                     Text("Duration",
                         style:
                             TextStyles.withColor(textcolor: AppColors.deepBlue)
                                 .headline3),
                     const SizedBox(height: 8),
-                    //_dropdown("30 days"),
                     FinalDropdown(),
+                    SizedBox(height: screenHeight * 0.022),
+                    Text("Time of day",
+                        style:
+                            TextStyles.withColor(textcolor: AppColors.deepBlue)
+                                .headline3),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),
-              //continue from here
-
-              
-              const SizedBox(height: 32),
-              const Text("Time of day",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF0F2851))),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 12,
-                children: [
-                  _timeOption("sunrise", "Morning", selected: true),
-                  _timeOption("sun", "Afternoon"),
-                  _timeOption("sunset", "Evening"),
-                  _timeOption("moon", "Night"),
-                ],
-              ),
-              const SizedBox(height: 12),
-              _textButton("Add custom time"),
-              const SizedBox(height: 32),
-              const Text("Taking with meals",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF0F2851))),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 12,
-                children: [
-                  _mealOption("Before meal", selected: true),
-                  _mealOption("After meal"),
-                  _mealOption("During the meal"),
-                ],
-              ),
-              const SizedBox(height: 32),
-              const Text("Set Reminder",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF0F2851))),
-              const SizedBox(height: 16),
-              _reminderTile("Before the scheduled time"),
-              const SizedBox(height: 16),
-              _reminderTile("After exceeding the time"),
-              const SizedBox(height: 32),
               SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF585CE5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Add Supplement",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          )),
-                      SizedBox(width: 8),
-                      Icon(Icons.arrow_forward),
-                    ],
-                  ),
+                height: 92,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.only(
+                      left: screenWidth * 0.06, right: screenWidth * 0.06),
+                  itemCount: time.length,
+                  itemBuilder: (context, index) {
+                    final form = time[index];
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          right: index == time.length - 1 ? 0 : 16),
+                      child: _formOption(
+                        form["icon"]!,
+                        form["label"]!,
+                        selected: index == 0,
+                      ),
+                    );
+                  },
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: screenHeight * 0.018),
+                    CustomOutlinedButton(
+                        text: "Add custom time",
+                        onPressed: () {},
+                        textStyle: TextStyles.buttontext2,
+                        buttonStyle: ButtonStyles.smallprimary),
+                    SizedBox(height: screenHeight * 0.022),
+                    Divider(color: AppColors.lightGrey, thickness: 1.5),
+                    SizedBox(height: screenHeight * 0.022),
+                    Text("Taking with meals",
+                        style:
+                            TextStyles.withColor(textcolor: AppColors.deepBlue)
+                                .headline3),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(
+                    left: screenWidth * 0.06, right: screenWidth * 0.06),
+                child: Row(
+                  children: List.generate(meal.length, (index) {
+                    final form = meal[index];
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          right: index == meal.length - 1 ? 0 : 16),
+                      child: _mealOption(
+                        form["label"]!,
+                        selected: index == 0,
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: screenHeight * 0.044),
+                    Text(
+                      "Set Reminder",
+                      style: TextStyles.withColor(textcolor: AppColors.deepBlue)
+                          .headline2,
+                    ),
+                    const SizedBox(height: 8),
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 24.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Before the scheduled time",
+                                style: TextStyles.withColor(
+                                        textcolor: AppColors.deepBlue)
+                                    .headline3),
+                            GestureDetector(
+                              onTap: () => controller
+                                  .isReminderBeforeTimeChecked
+                                  .toggle(),
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 1.5,
+                                    color:AppColors.dustGrey,
+                                  ),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 12,
+                                  backgroundColor: controller
+                                          .isReminderBeforeTimeChecked.value
+                                      ? AppColors.turquoise
+                                      : AppColors.lilacPetalsDark,
+                                  child: Icon(
+                                    controller.isReminderBeforeTimeChecked.value
+                                        ? Icons.check
+                                        : null,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(color: AppColors.lightGrey, thickness: 1.5),
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Before the scheduled time",
+                                style: TextStyles.withColor(
+                                        textcolor: AppColors.deepBlue)
+                                    .headline3),
+                            GestureDetector(
+                              onTap: () => controller.isReminderAfterTimeChecked
+                                  .toggle(),
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 1.5,
+                                    color:AppColors.dustGrey,
+                                  ),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 12,
+                                  backgroundColor: controller
+                                          .isReminderAfterTimeChecked.value
+                                      ? AppColors.turquoise
+                                      : AppColors.lilacPetalsDark,
+                                  child: Icon(
+                                    controller.isReminderAfterTimeChecked.value
+                                        ? Icons.check
+                                        : null,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(color: AppColors.lightGrey, thickness: 1.5),
+                    SizedBox(height: screenHeight * 0.022),
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: CustomElevatedButton(
+                        text: 'Add Supplement',
+                        buttonStyle: ButtonStyles.buttonprimary,
+                        textStyle: TextStyles.buttontext1,
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -374,47 +498,19 @@ Widget _formOption(String icon, String label, {bool selected = false}) {
   );
 }
 
-Widget _timeOption(String icon, String label, {bool selected = false}) {
-  return OutlinedButton.icon(
-    onPressed: () {},
-    icon: Text(icon),
-    label: Text(label),
-    style: OutlinedButton.styleFrom(
-      backgroundColor: selected ? Color(0xFF585CE5).withOpacity(0.1) : null,
-      side: BorderSide(color: Color(0xFF585CE5)),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
-  );
-}
-
-Widget _textButton(String text) => TextButton(
-      onPressed: () {},
-      child: Text(text, style: TextStyle(color: Color(0xFF585CE5))),
-    );
-
-Widget _mealOption(String label, {bool selected = false}) => OutlinedButton(
-      onPressed: () {},
-      child: Text(label),
-      style: OutlinedButton.styleFrom(
-        backgroundColor: selected ? Color(0xFF585CE5).withOpacity(0.1) : null,
-        side: BorderSide(color: Color(0xFF585CE5)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
-
-Widget _reminderTile(String title) => Container(
-      padding: const EdgeInsets.all(16),
+Widget _mealOption(String label, {bool selected = false}) => Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Color(0xFFF5F6FA),
-        border: Border.all(color: Color(0xFFE5E6EE)),
+        color: AppColors.lilacPetalsDark,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+            color: selected ? AppColors.purplePlum : AppColors.lilacPetalsDark),
       ),
-      child: Row(
-        children: [
-          Icon(Icons.alarm, color: Color(0xFF585CE5)),
-          const SizedBox(width: 12),
-          Expanded(child: Text(title)),
-          Switch(value: true, onChanged: (_) {}),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text(
+          label,
+          style: TextStyles.buttontext2.copyWith(
+              color: selected ? AppColors.deepBlue : AppColors.darkGrey),
+        ),
       ),
     );
