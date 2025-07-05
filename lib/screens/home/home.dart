@@ -170,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                                           CustomOutlinedButton(
                                             text: 'Activity',
                                             onPressed: () =>
-                                                Navigator.pop(context),
+                                                Get.offNamed('/add_activity'),
                                             textStyle:
                                                 TextStyles.buttontext1.copyWith(
                                               color: AppColors.purplePlum,

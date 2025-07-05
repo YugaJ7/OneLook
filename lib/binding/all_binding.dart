@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:onelook/controllers/add_activity.dart';
 
 import '../controllers/add_supplement.dart';
 import '../controllers/forgot_controller.dart';
@@ -52,5 +53,13 @@ class AddSupplementBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => AddSupplementController());
+  }
+}
+
+// add_supplement_binding.dart
+class AddActivityBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => AddActivityController());
   }
 }
