@@ -16,7 +16,7 @@ class ReminderToggleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

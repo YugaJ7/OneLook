@@ -51,7 +51,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                       Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: AppColors.violetLight,
+                          color: Colors.transparent,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(Icons.keyboard_arrow_down, color: AppColors.deepBlue, size: 24),
