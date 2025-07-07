@@ -1,12 +1,18 @@
 import 'package:get/get.dart';
 
 class AddActivityController extends GetxController {
-
   final isReminderBeforeTimeChecked = false.obs;
   final isReminderAfterTimeChecked = false.obs;
 
-  final selectedFormIndex = 0.obs;
+  final selectedFormIndex = (-1).obs;
   final selectedTimeOption = ''.obs;
+  final isCustomTimeSelected = false.obs;
+
+  final customHour = 0.obs;
+  final customMinute = 0.obs;
+
+  final durationHour = 0.obs;
+  final durationMinute = 0.obs;
 
   final activity = [
     {"icon": "running", "label": "Running"},
@@ -27,17 +33,34 @@ class AddActivityController extends GetxController {
     {"icon": "night", "label": "Night"},
   ];
 
+  String get customTimeFormatted {
+    final h = customHour.value.toString().padLeft(2, '0');
+    final m = customMinute.value.toString().padLeft(2, '0');
+    return "$h:$m";
+  }
 
+  String get customTimeDisplay {
+    final h = customHour.value;
+    final m = customMinute.value;
+    final isAm = h < 12;
+    final formattedHour =
+        (h % 12 == 0 ? 12 : h % 12).toString().padLeft(2, '0');
+    final formattedMinute = m.toString().padLeft(2, '0');
+    return "$formattedHour:$formattedMinute ${isAm ? 'AM' : 'PM'}";
+  }
 
   void submitActivity() {
     final data = {
-      "form": activity[selectedFormIndex.value]["label"],
+      "form": selectedFormIndex.value >= 0
+          ? activity[selectedFormIndex.value]["label"]
+          : null,
       "timeOfDay": selectedTimeOption.value,
+      "customTime": customTimeFormatted,
+      "duration": "${durationHour.value}h ${durationMinute.value}m",
       "reminderBefore": isReminderBeforeTimeChecked.value,
       "reminderAfter": isReminderAfterTimeChecked.value,
     };
 
-    // TODO: Post this data to your backend API
     print("Collected Data: $data");
   }
 }

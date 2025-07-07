@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/style/text.dart';
+import 'package:onelook/components/widgets/bottomsheet/time_sheet.dart';
 import 'package:onelook/components/widgets/buttons/elevated_button.dart';
 import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/components/widgets/common/activity_option_tile.dart';
+import 'package:onelook/components/widgets/common/duration_picker.dart';
 import 'package:onelook/components/widgets/common/form_option_tile.dart';
 import 'package:onelook/components/widgets/common/reminder_toggle_row.dart';
 import 'package:onelook/constants/app_color.dart';
@@ -81,8 +83,7 @@ class AddActivityScreen extends StatelessWidget {
                                       onTap: () => controller
                                           .selectedFormIndex.value = index,
                                     ),
-                                  )
-                                );
+                                  ));
                             },
                           ),
                         );
@@ -110,8 +111,11 @@ class AddActivityScreen extends StatelessWidget {
                               icon: item['icon']!,
                               label: item['label']!,
                               selected: isSelected,
-                              onTap: () => controller.selectedTimeOption.value =
-                                  item['label']!,
+                              onTap: () {
+                                controller.selectedTimeOption.value =
+                                    item['label']!;
+                                controller.isCustomTimeSelected.value = false;
+                              },
                             );
                           });
                         },
@@ -119,12 +123,24 @@ class AddActivityScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    CustomOutlinedButton(
-                      text: "Add custom time",
-                      onPressed: () {}, // TODO: handle custom time
-                      textStyle: TextStyles.buttontext2,
-                      buttonStyle: ButtonStyles.smallprimary,
-                    ),
+                    Obx(() => CustomOutlinedButton(
+                          text: controller.isCustomTimeSelected.value
+                              ? controller.customTimeDisplay
+                              : "Add Custom Time",
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20)),
+                              ),
+                              builder: (_) => const CustomTimeBottomSheet(),
+                            );
+                          },
+                          textStyle: TextStyles.buttontext2,
+                          buttonStyle: ButtonStyles.smallprimary,
+                        )),
                     sectionSpacing(height),
                     Divider(
                       color: AppColors.lightGrey,
@@ -132,6 +148,14 @@ class AddActivityScreen extends StatelessWidget {
                     ),
                     sectionSpacing(height),
                     sectionTitleRich("Activity duration ", "(hours/minutes)"),
+                    Obx(() => DurationPicker(
+                          initialHour: controller.durationHour.value,
+                          initialMinute: controller.durationMinute.value,
+                          onChanged: (h, m) {
+                            controller.durationHour.value = h;
+                            controller.durationMinute.value = m;
+                          },
+                        )),
                   ],
                 ),
               ),
