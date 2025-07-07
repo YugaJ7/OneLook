@@ -174,12 +174,19 @@ class AddSupplementScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    CustomOutlinedButton(
-                      text: "Add custom time",
-                      onPressed: () {}, // TODO: handle custom time
-                      textStyle: TextStyles.buttontext2,
-                      buttonStyle: ButtonStyles.smallprimary,
-                    ),
+                    Obx(() => CustomOutlinedButton(
+                          text: controller
+                                      .selectedTimeOption.value.isNotEmpty &&
+                                  !controller.timesOfDay
+                                      .map((t) => t['label'])
+                                      .contains(
+                                          controller.selectedTimeOption.value)
+                              ? controller.selectedTimeOption.value
+                              : "Add custom time",
+                          onPressed: controller.showCustomTimePicker,
+                          textStyle: TextStyles.buttontext2,
+                          buttonStyle: ButtonStyles.smallprimary,
+                        )),
                     sectionSpacing(height),
                     Divider(
                       color: AppColors.lightGrey,

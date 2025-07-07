@@ -33,7 +33,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         decoration: BoxDecoration(
           color: AppColors.lilacPetals,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.purplePlum),
+          border: Border.all(color: AppColors.lilacPetalsDark),
         ),
         child: Column(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onelook/components/widgets/common/duration_picker.dart';
 
 class AddSupplementController extends GetxController {
   final textController = TextEditingController();
@@ -8,14 +9,14 @@ class AddSupplementController extends GetxController {
   final isReminderBeforeTimeChecked = false.obs;
   final isReminderAfterTimeChecked = false.obs;
 
-  final selectedFormIndex = 0.obs;
-  final selectedDosageTimes = 1.obs;
-  final selectedDosageAmount = 1.obs;
+  final selectedFormIndex = (-1).obs; 
+  final selectedDosageTimes = (-1).obs;
+  final selectedDosageAmount = (-1).obs;
   final selectedMealOption = ''.obs;
-  final selectedTimeOption = ''.obs;
+  final selectedTimeOption = ''.obs; 
 
   final selectedFrequency = 'Everyday'.obs;
-  final selectedDuration = '7 days'.obs;
+  final selectedDuration = '3 days'.obs;
 
   final supplementForms = [
     {"icon": "pill", "label": "Pill"},
@@ -64,8 +65,8 @@ class AddSupplementController extends GetxController {
     textController.addListener(() {
       text.value = textController.text;
     });
-    selectedMealOption.value = mealOptions.first;
-    selectedTimeOption.value = timesOfDay.first["label"]!;
+    selectedMealOption.value = '';
+    selectedTimeOption.value = '';
     super.onInit();
   }
 
@@ -107,10 +108,58 @@ class AddSupplementController extends GetxController {
     }
   }
 
+  String formatTime(int hour, int minute) {
+    final time = TimeOfDay(hour: hour, minute: minute);
+    final now = DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    return TimeOfDay.fromDateTime(dt).format(Get.context!);
+  }
+
+  void showCustomTimePicker() {
+    int initialHour = 0;
+    int initialMinute = 0;
+
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                const Text("Add Time", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.check),
+                  onPressed: () => Get.back(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            DurationPicker(
+              initialHour: initialHour,
+              initialMinute: initialMinute,
+              onChanged: (hour, minute) {
+                selectedTimeOption.value = formatTime(hour, minute);
+              },
+            ),
+          ],
+        ),
+      ),
+      isScrollControlled: true,
+    );
+  }
+
   void submitSupplement() {
     final data = {
       "name": text.value,
-      "form": supplementForms[selectedFormIndex.value]["label"],
+      "form": selectedFormIndex.value >= 0
+          ? supplementForms[selectedFormIndex.value]["label"]
+          : null,
       "dosageTimes": selectedDosageTimes.value,
       "dosageAmount": selectedDosageAmount.value,
       "frequency": selectedFrequency.value,
@@ -121,7 +170,6 @@ class AddSupplementController extends GetxController {
       "reminderAfter": isReminderAfterTimeChecked.value,
     };
 
-    // TODO: Post this data to your backend API
     print("Collected Data: $data");
   }
 }
