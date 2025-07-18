@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _stats = [
+    final List<Map<String, dynamic>> stats = [
       {
         'title': 'Breath Rate',
         'rate': '12 BrPM',
@@ -102,12 +102,12 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(
                     left: screenWidth * 0.06, right: screenWidth * 0.06),
-                itemCount: _stats.length,
+                itemCount: stats.length,
                 itemBuilder: (context, index) {
-                  final stat = _stats[index];
+                  final stat = stats[index];
                   return Padding(
                     padding: EdgeInsets.only(
-                        right: index == _stats.length - 1
+                        right: index == stats.length - 1
                             ? 0
                             : screenWidth * 0.04),
                     child: StatsCard(

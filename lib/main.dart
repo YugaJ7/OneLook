@@ -9,6 +9,7 @@ import 'package:onelook/screens/auth/new_pass.dart';
 import 'package:onelook/components/navbar/navbar.dart';
 import 'package:onelook/screens/home/add_activity.dart';
 import 'package:onelook/screens/home/add_supplement.dart';
+import 'package:onelook/screens/settings/activity_manager.dart';
 import 'binding/all_binding.dart';
 
 void main() {
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/newpassword', page: () => NewPassScreen()),
         GetPage(name: '/confirm', page: () => ConfirmScreen()),
         GetPage(name: '/navbar', page: () => Navbar()),
+        GetPage(name: '/activity_manager', page: () => ActivityManagerScreen()),
       ],
     );
   }

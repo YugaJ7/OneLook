@@ -4,7 +4,7 @@ import 'package:onelook/constants/app_color.dart';
 class MenuOption extends StatelessWidget {
   final String text;
   final String? suffixIcon;
-  final VoidCallback? onPressed;
+  final VoidCallback onTap;
   final TextStyle? textStyle;
   final String? prefixIcon;
 
@@ -14,7 +14,7 @@ class MenuOption extends StatelessWidget {
     required this.textStyle,
     this.suffixIcon,
     this.prefixIcon,
-    this.onPressed,
+    required this.onTap,
   });
 
   @override
@@ -23,7 +23,7 @@ class MenuOption extends StatelessWidget {
       SizedBox(
         height: MediaQuery.of(context).size.height * 0.08,
         child: GestureDetector(
-          onTap: onPressed,
+          onTap: onTap,
           child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
             prefixIcon != null
                 ? Row(children: [
