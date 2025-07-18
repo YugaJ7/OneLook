@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707897906712",
+    "project_id": "onelook-2507",
+    "storage_bucket": "onelook-2507.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707897906712:android:73021f0da700896a03956d",
+        "android_client_info": {
+          "package_name": "com.example.onelook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_w8GkKI126PtuFsLbkqaQ8oEcrF69kts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
