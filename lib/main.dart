@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
             ),
         GetPage(name: '/newpassword', page: () => NewPassScreen()),
         GetPage(name: '/confirm', page: () => ConfirmScreen()),
-        GetPage(name: '/navbar', page: () => Navbar()),
+        GetPage(name: '/navbar', page: () => Navbar(), binding: NavbarBinding()),
         GetPage(name: '/activity_manager', page: () => ActivityManagerScreen()),
       ],
     );

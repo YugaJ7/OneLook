@@ -7,7 +7,7 @@ import 'package:onelook/controllers/home/navbar_controller.dart';
 class Navbar extends StatelessWidget {
   Navbar({super.key});
 
-  final NavbarController controller = Get.put(NavbarController());
+  final NavbarController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
