@@ -1,6 +1,11 @@
 import 'package:get/get.dart';
+import 'package:onelook/data/models/activity_model.dart';
+import 'package:onelook/data/repository/activity_repository.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
 
 class AddActivityController extends GetxController {
+  final _repo = ActivityRepository();
+  
   final isReminderBeforeTimeChecked = false.obs;
   final isReminderAfterTimeChecked = false.obs;
 
@@ -49,18 +54,33 @@ class AddActivityController extends GetxController {
     return "$formattedHour:$formattedMinute ${isAm ? 'AM' : 'PM'}";
   }
 
-  void submitActivity() {
-    final data = {
-      "form": selectedFormIndex.value >= 0
-          ? activity[selectedFormIndex.value]["label"]
-          : null,
-      "timeOfDay": selectedTimeOption.value,
-      "customTime": customTimeFormatted,
-      "duration": "${durationHour.value}h ${durationMinute.value}m",
-      "reminderBefore": isReminderBeforeTimeChecked.value,
-      "reminderAfter": isReminderAfterTimeChecked.value,
-    };
-
-    print("Collected Data: $data");
+  void submitActivity() async {
+  if (selectedFormIndex.value < 0 || selectedTimeOption.value.isEmpty) {
+    Get.snackbar("Error", "Please select an activity and time.");
+    return;
   }
+
+  final activitydata = ActivityModel(
+    form: activity[selectedFormIndex.value]["label"]!,
+    timeOfDay: selectedTimeOption.value,
+    customTime: customTimeFormatted,
+    duration: "${durationHour.value}h ${durationMinute.value}m",
+    reminderBefore: isReminderBeforeTimeChecked.value,
+    reminderAfter: isReminderAfterTimeChecked.value,
+    createdAt: DateTime.now(),
+  );
+
+  try {
+    final userId = Get.find<AuthRepository>().currentUserId;
+    if (userId != null) {
+      await _repo.addActivity(userId, activitydata);
+      Get.back();
+      Get.snackbar("Success", "Activity added successfully");
+    } else {
+      Get.snackbar("Error", "User not authenticated");
+    }
+  } catch (e) {
+    Get.snackbar("Error", "Failed to save activity: $e");
+  }
+}
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onelook/components/widgets/common/duration_picker.dart';
+import 'package:onelook/data/models/supplement_model.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
+import 'package:onelook/data/repository/supplement_repository.dart';
 
 class AddSupplementController extends GetxController {
+  final _repo = SupplementRepository();
   final textController = TextEditingController();
   var text = ''.obs;
 
@@ -12,11 +15,17 @@ class AddSupplementController extends GetxController {
   final selectedFormIndex = (-1).obs; 
   final selectedDosageTimes = (-1).obs;
   final selectedDosageAmount = (-1).obs;
-  final selectedMealOption = ''.obs;
-  final selectedTimeOption = ''.obs; 
-
   final selectedFrequency = 'Everyday'.obs;
   final selectedDuration = '3 days'.obs;
+  final selectedMealOption = ''.obs;
+  final selectedTimeOption = ''.obs;
+  final isCustomTimeSelected = false.obs; 
+
+  final customHour = 0.obs;
+  final customMinute = 0.obs;
+
+  final durationHour = 0.obs;
+  final durationMinute = 0.obs;
 
   final supplementForms = [
     {"icon": "pill", "label": "Pill"},
@@ -70,10 +79,20 @@ class AddSupplementController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    textController.dispose();
-    super.onClose();
+String get customTimeFormatted {
+    final h = customHour.value.toString().padLeft(2, '0');
+    final m = customMinute.value.toString().padLeft(2, '0');
+    return "$h:$m";
+  }
+
+  String get customTimeDisplay {
+    final h = customHour.value;
+    final m = customMinute.value;
+    final isAm = h < 12;
+    final formattedHour =
+        (h % 12 == 0 ? 12 : h % 12).toString().padLeft(2, '0');
+    final formattedMinute = m.toString().padLeft(2, '0');
+    return "$formattedHour:$formattedMinute ${isAm ? 'AM' : 'PM'}";
   }
 
   void updateDuration(BuildContext context, String value) {
@@ -108,68 +127,49 @@ class AddSupplementController extends GetxController {
     }
   }
 
-  String formatTime(int hour, int minute) {
-    final time = TimeOfDay(hour: hour, minute: minute);
-    final now = DateTime.now();
-    final dt = DateTime(now.year, now.month, now.day, time.hour, time.minute);
-    return TimeOfDay.fromDateTime(dt).format(Get.context!);
-  }
+  void submitSupplement() async {
+    if (text.value.isEmpty ||
+    selectedFormIndex.value < 0 ||
+        selectedDosageTimes.value<1 ||
+        selectedDosageAmount.value<1 ||
+        selectedMealOption.value.isEmpty ||
+        selectedTimeOption.value.isEmpty) {
+      Get.snackbar("Missing Info", "Please fill all required fields.");
+      return;
+    }
 
-  void showCustomTimePicker() {
-    int initialHour = 0;
-    int initialMinute = 0;
-
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                const Text("Add Time", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.check),
-                  onPressed: () => Get.back(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            DurationPicker(
-              initialHour: initialHour,
-              initialMinute: initialMinute,
-              onChanged: (hour, minute) {
-                selectedTimeOption.value = formatTime(hour, minute);
-              },
-            ),
-          ],
-        ),
-      ),
-      isScrollControlled: true,
+    final model = SupplementModel(
+      name: text.value,
+      form: supplementForms[selectedFormIndex.value]["label"]!,
+      dosageTimes: selectedDosageTimes.value,
+      dosageAmount: selectedDosageAmount.value,
+      frequency: selectedFrequency.value,
+      duration: selectedDuration.value,
+      timeOfDay: selectedTimeOption.value,
+      customTime: customTimeFormatted,
+      meal: selectedMealOption.value,
+      reminderBefore: isReminderBeforeTimeChecked.value,
+      reminderAfter: isReminderAfterTimeChecked.value,
+      createdAt: DateTime.now(),
     );
+
+    try {
+      final userId = Get.find<AuthRepository>().currentUserId;
+      if (userId != null) {
+        await _repo.addSupplement(userId, model);
+        Get.back();
+        Get.snackbar("Success", "Supplement added");
+      } else {
+        Get.snackbar("Error", "No user found.");
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Failed to add: $e");
+    }
   }
 
-  void submitSupplement() {
-    final data = {
-      "name": text.value,
-      "form": selectedFormIndex.value >= 0
-          ? supplementForms[selectedFormIndex.value]["label"]
-          : null,
-      "dosageTimes": selectedDosageTimes.value,
-      "dosageAmount": selectedDosageAmount.value,
-      "frequency": selectedFrequency.value,
-      "duration": selectedDuration.value,
-      "meal": selectedMealOption.value,
-      "timeOfDay": selectedTimeOption.value,
-      "reminderBefore": isReminderBeforeTimeChecked.value,
-      "reminderAfter": isReminderAfterTimeChecked.value,
-    };
-
-    print("Collected Data: $data");
+  @override
+  void onClose() {
+    textController.dispose();
+    super.onClose();
   }
 }

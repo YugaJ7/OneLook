@@ -1,12 +1,19 @@
 import 'package:get/get.dart';
 import 'package:onelook/controllers/add_activity.dart';
+import 'package:onelook/controllers/add_supplement.dart';
+import 'package:onelook/controllers/forgot_controller.dart';
+import 'package:onelook/controllers/login_controller.dart';
+import 'package:onelook/controllers/onboarding_controller.dart';
+import 'package:onelook/controllers/sign_up_controller.dart';
+import 'package:onelook/controllers/splash_controller.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
 
-import '../controllers/add_supplement.dart';
-import '../controllers/forgot_controller.dart';
-import '../controllers/login_controller.dart';
-import '../controllers/onboarding_controller.dart';
-import '../controllers/sign_up_controller.dart';
-import '../controllers/splash_controller.dart';
+class InitialBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.put<AuthRepository>(AuthRepository(), permanent: true); 
+  }
+}
 
 // splash_binding.dart
 class SplashBinding implements Bindings {

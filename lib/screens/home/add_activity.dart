@@ -135,7 +135,13 @@ class AddActivityScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.vertical(
                                     top: Radius.circular(20)),
                               ),
-                              builder: (_) => const CustomTimeBottomSheet(),
+                              builder: (_) => CustomTimeBottomSheet(
+  customHour: controller.customHour,
+  customMinute: controller.customMinute,
+  isCustomTimeSelected: controller.isCustomTimeSelected,
+  selectedTimeOption: controller.selectedTimeOption,
+),
+
                             );
                           },
                           textStyle: TextStyles.buttontext2,

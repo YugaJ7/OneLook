@@ -3,26 +3,35 @@ import 'package:get/get.dart';
 import 'package:onelook/constants/app_color.dart';
 import 'package:onelook/components/style/text.dart';
 import 'package:onelook/components/widgets/common/duration_picker.dart';
-import 'package:onelook/controllers/add_activity.dart';
 
 class CustomTimeBottomSheet extends StatefulWidget {
-  const CustomTimeBottomSheet({super.key});
+  final RxInt customHour;
+final RxInt customMinute;
+final RxBool isCustomTimeSelected;
+final RxString selectedTimeOption;
+
+const CustomTimeBottomSheet({
+  super.key,
+  required this.customHour,
+  required this.customMinute,
+  required this.isCustomTimeSelected,
+  required this.selectedTimeOption,
+});
+
 
   @override
   State<CustomTimeBottomSheet> createState() => _CustomTimeBottomSheetState();
 }
 
 class _CustomTimeBottomSheetState extends State<CustomTimeBottomSheet> {
-  final AddActivityController controller = Get.find();
-
-  int selectedHour = 0;
-  int selectedMinute = 0;
+  late int selectedHour;
+  late int selectedMinute;
 
   @override
   void initState() {
     super.initState();
-    selectedHour = controller.customHour.value;
-    selectedMinute = controller.customMinute.value;
+    selectedHour = widget.customHour.value;
+    selectedMinute = widget.customMinute.value;
   }
 
   @override
@@ -48,10 +57,10 @@ class _CustomTimeBottomSheetState extends State<CustomTimeBottomSheet> {
                       .headline3),
               GestureDetector(
                 onTap: () {
-                  controller.customHour.value = selectedHour;
-                  controller.customMinute.value = selectedMinute;
-                  controller.isCustomTimeSelected.value = true;
-                  controller.selectedTimeOption.value = "Custom";
+                  widget.customHour.value = selectedHour;
+                  widget.customMinute.value = selectedMinute;
+                  widget.isCustomTimeSelected.value = true;
+                  widget.selectedTimeOption.value = "Custom";
                   Navigator.of(context).pop();
                 },
                 child: const Icon(Icons.check,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/style/text.dart';
+import 'package:onelook/components/widgets/bottomsheet/time_sheet.dart';
 import 'package:onelook/components/widgets/buttons/elevated_button.dart';
 import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/components/widgets/common/circle_selector.dart';
@@ -165,8 +166,11 @@ class AddSupplementScreen extends StatelessWidget {
                               icon: item['icon']!,
                               label: item['label']!,
                               selected: isSelected,
-                              onTap: () => controller.selectedTimeOption.value =
-                                  item['label']!,
+                              onTap: () {
+                                controller.selectedTimeOption.value =
+                                    item['label']!;
+                                controller.isCustomTimeSelected.value = false;
+                              },
                             );
                           });
                         },
@@ -175,15 +179,26 @@ class AddSupplementScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Obx(() => CustomOutlinedButton(
-                          text: controller
-                                      .selectedTimeOption.value.isNotEmpty &&
-                                  !controller.timesOfDay
-                                      .map((t) => t['label'])
-                                      .contains(
-                                          controller.selectedTimeOption.value)
-                              ? controller.selectedTimeOption.value
-                              : "Add custom time",
-                          onPressed: controller.showCustomTimePicker,
+                          text: controller.isCustomTimeSelected.value
+                              ? controller.customTimeDisplay
+                              : "Add Custom Time",
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20)),
+                              ),
+                              builder: (_) => CustomTimeBottomSheet(
+  customHour: controller.customHour,
+  customMinute: controller.customMinute,
+  isCustomTimeSelected: controller.isCustomTimeSelected,
+  selectedTimeOption: controller.selectedTimeOption,
+),
+
+                            );
+                          },
                           textStyle: TextStyles.buttontext2,
                           buttonStyle: ButtonStyles.smallprimary,
                         )),
