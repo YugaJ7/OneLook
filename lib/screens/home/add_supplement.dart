@@ -12,7 +12,7 @@ import 'package:onelook/components/widgets/common/reminder_toggle_row.dart';
 import 'package:onelook/components/widgets/dropdown/dropdown.dart';
 import 'package:onelook/components/widgets/textfield/text_field.dart';
 import 'package:onelook/constants/app_color.dart';
-import 'package:onelook/controllers/add_supplement.dart';
+import 'package:onelook/controllers/home/add_supplement.dart';
 
 class AddSupplementScreen extends StatelessWidget {
   final AddSupplementController controller = Get.find();

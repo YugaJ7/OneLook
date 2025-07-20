@@ -5,7 +5,7 @@ import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/widgets/buttons/elevated_button.dart';
 import 'package:onelook/components/style/text.dart';
 import 'package:onelook/constants/app_color.dart';
-import 'package:onelook/controllers/splash_controller.dart';
+import 'package:onelook/controllers/auth/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   final SplashController controller = Get.find();

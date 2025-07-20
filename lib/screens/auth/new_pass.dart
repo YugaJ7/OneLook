@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../components/style/button.dart';
 import '../../components/widgets/buttons/elevated_button.dart';
-import '../../controllers/newpass_controller.dart';
+import '../../controllers/auth/newpass_controller.dart';
 import '../../components/style/text.dart';
 import '../../constants/app_color.dart';
 

@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:onelook/controllers/add_activity.dart';
-import 'package:onelook/controllers/add_supplement.dart';
-import 'package:onelook/controllers/forgot_controller.dart';
-import 'package:onelook/controllers/login_controller.dart';
-import 'package:onelook/controllers/onboarding_controller.dart';
-import 'package:onelook/controllers/sign_up_controller.dart';
-import 'package:onelook/controllers/splash_controller.dart';
+import 'package:onelook/controllers/home/add_activity.dart';
+import 'package:onelook/controllers/home/add_supplement.dart';
+import 'package:onelook/controllers/auth/forgot_controller.dart';
+import 'package:onelook/controllers/auth/login_controller.dart';
+import 'package:onelook/controllers/auth/onboarding_controller.dart';
+import 'package:onelook/controllers/auth/sign_up_controller.dart';
+import 'package:onelook/controllers/auth/splash_controller.dart';
 import 'package:onelook/data/repository/auth_repository.dart';
 
 class InitialBinding implements Bindings {

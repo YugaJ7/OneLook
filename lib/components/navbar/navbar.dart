@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/components/navbar/navbar_data.dart';
 import 'package:onelook/constants/app_color.dart';
-import 'package:onelook/controllers/navbar_controller.dart';
+import 'package:onelook/controllers/home/navbar_controller.dart';
 
 class Navbar extends StatelessWidget {
   Navbar({super.key});

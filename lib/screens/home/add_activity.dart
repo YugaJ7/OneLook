@@ -10,7 +10,7 @@ import 'package:onelook/components/widgets/common/duration_picker.dart';
 import 'package:onelook/components/widgets/common/form_option_tile.dart';
 import 'package:onelook/components/widgets/common/reminder_toggle_row.dart';
 import 'package:onelook/constants/app_color.dart';
-import 'package:onelook/controllers/add_activity.dart';
+import 'package:onelook/controllers/home/add_activity.dart';
 
 class AddActivityScreen extends StatelessWidget {
   final AddActivityController controller = Get.find();

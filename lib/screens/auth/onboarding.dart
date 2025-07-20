@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/constants/app_color.dart';
-import 'package:onelook/controllers/onboarding_controller.dart';
+import 'package:onelook/controllers/auth/onboarding_controller.dart';
 import 'package:onelook/components/style/text.dart';
 
 class OnboardingScreen extends StatelessWidget {

@@ -6,7 +6,7 @@ import 'package:onelook/components/widgets/textfield/auth_text_field.dart';
 import '../../components/style/text.dart';
 import '../../components/widgets/buttons/social_button.dart';
 import '../../constants/app_color.dart';
-import '../../controllers/sign_up_controller.dart';
+import '../../controllers/auth/sign_up_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
   final SignUpController controller = Get.put(SignUpController());

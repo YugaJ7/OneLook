@@ -5,7 +5,7 @@ import 'package:onelook/components/widgets/buttons/elevated_button.dart';
 import 'package:onelook/components/widgets/textfield/auth_text_field.dart';
 import '../../components/style/text.dart';
 import '../../constants/app_color.dart';
-import '../../controllers/forgot_controller.dart';
+import '../../controllers/auth/forgot_controller.dart';
 
 class ForgotScreen extends StatelessWidget {
   final ForgotController controller = Get.find();
