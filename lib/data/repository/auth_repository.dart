@@ -5,6 +5,19 @@ class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  String? _cachedUserId;
+  bool get isLoggedIn => _auth.currentUser != null;
+  User? get currentUser => _auth.currentUser;
+  String? get currentUserId {
+    if (_cachedUserId != null) return _cachedUserId;
+
+    final user = _auth.currentUser;
+    if (user != null) {
+      _cachedUserId = user.uid;
+    }
+    return _cachedUserId;
+  }
+
   // SIGN UP with Email & Password + Save Name
   Future<User?> signUp({
     required String name,
@@ -21,10 +34,12 @@ class AuthRepository {
       if (user != null) {
         await user.updateDisplayName(name);
         await _firestore.collection('users').doc(user.uid).set({
-          'uid': user.uid,
-          'name': name,
-          'email': email,
-          'createdAt': FieldValue.serverTimestamp(),
+          'profile': {
+            'name': name,
+            'email': email,
+            'age': null,
+            'gender': null,
+          }
         });
         return user;
       }
@@ -57,6 +72,14 @@ class AuthRepository {
   // CHECK if user is already logged in
   User? getCurrentUser() {
     return _auth.currentUser;
+  }
+
+  // Call this after login/signup
+  void cacheUserId() {
+    final user = _auth.currentUser;
+    if (user != null) {
+      _cachedUserId = user.uid;
+    }
   }
 
   // LOGOUT
