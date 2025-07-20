@@ -1,12 +1,15 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:onelook/repository/auth_repository.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> logoAnimation;
   late Animation<double> textOpacity;
-  var showText = false.obs;
+
+  final showText = false.obs;
+  final showStartButton = false.obs;
+
   final AuthRepository _authRepo = AuthRepository();
 
   @override
@@ -34,16 +37,23 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
       curve: Curves.easeIn,
     ));
 
-    Future.delayed(Duration(seconds: 2), () async {
-      showText.value = true;
-      controller.forward();
+    _initSplashFlow();
+  }
 
-      await Future.delayed(Duration(seconds: 1)); // give time for animation
-      final user = _authRepo.getCurrentUser();
-      if (user != null) {
-        Get.offAllNamed('/home');
-      }
-    });
+  Future<void> _initSplashFlow() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    showText.value = true;
+    controller.forward();
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (_authRepo.isLoggedIn) {
+      _authRepo.cacheUserId();
+      Get.offAllNamed('/navbar');
+    } else {
+      showStartButton.value = true;
+    }
   }
 
   @override

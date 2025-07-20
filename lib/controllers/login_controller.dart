@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onelook/repository/auth_repository.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
 
 class LoginController extends GetxController {
   final AuthRepository _authRepo = AuthRepository();
@@ -26,6 +26,7 @@ class LoginController extends GetxController {
     try {
       isLoading.value = true;
       final user = await _authRepo.login(email: email, password: password);
+      _authRepo.cacheUserId();
       isLoading.value = false;
 
       if (user != null) {

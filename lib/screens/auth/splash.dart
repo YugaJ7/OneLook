@@ -57,7 +57,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
           ),
-          Obx(() => controller.showText.value
+          Obx(() => controller.showStartButton.value
               ? FadeTransition(
                   opacity: controller.textOpacity,
                   child: Padding(

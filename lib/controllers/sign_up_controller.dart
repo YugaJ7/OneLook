@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onelook/repository/auth_repository.dart';
+import 'package:onelook/data/repository/auth_repository.dart';
 
 class SignUpController extends GetxController {
   final AuthRepository _authRepo = AuthRepository();
@@ -63,6 +63,7 @@ class SignUpController extends GetxController {
 
     try {
       await _authRepo.signUp(name: name, email: email, password: password);
+      _authRepo.cacheUserId();
       // Navigate to navbar after success
       Get.offAllNamed('/navbar');
     } catch (e) {
