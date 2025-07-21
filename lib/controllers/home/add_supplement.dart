@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onelook/data/models/supplement_model.dart';
@@ -5,28 +7,38 @@ import 'package:onelook/data/repository/auth_repository.dart';
 import 'package:onelook/data/repository/supplement_repository.dart';
 
 class AddSupplementController extends GetxController {
-  final _repo = SupplementRepository();
+  final SupplementRepository _repo = SupplementRepository();
   final textController = TextEditingController();
-  var text = ''.obs;
 
+  // Supplement Info
+  final selectedFormIndex = 0.obs;
+  final selectedDosageTimes = 1.obs;
+  final selectedDosageAmount = 1.obs;
+
+  // Dropdown Selections
+  final selectedFrequency = ''.obs;
+  final selectedDuration = ''.obs;
+
+  // Meal Option
+  final selectedMealOption = ''.obs;
+
+  // Reminder Toggles
   final isReminderBeforeTimeChecked = false.obs;
   final isReminderAfterTimeChecked = false.obs;
 
-  final selectedFormIndex = (-1).obs; 
-  final selectedDosageTimes = (-1).obs;
-  final selectedDosageAmount = (-1).obs;
-  final selectedFrequency = 'Everyday'.obs;
-  final selectedDuration = '3 days'.obs;
-  final selectedMealOption = ''.obs;
-  final selectedTimeOption = ''.obs;
-  final isCustomTimeSelected = false.obs; 
+  // Time of Day Selection
+  final timesOfDay = [
+    {"icon": "sunrise", "label": "Morning"},
+    {"icon": "afternoon", "label": "Afternoon"},
+    {"icon": "sunset", "label": "Evening"},
+    {"icon": "night", "label": "Night"},
+  ];
 
-  final customHour = 0.obs;
-  final customMinute = 0.obs;
+  final selectedTimeOptions = <RxString>[].obs;
+  final isCustomTimeSelected = <RxBool>[].obs;
+  final customTimeDisplayList = <String>[].obs;
 
-  final durationHour = 0.obs;
-  final durationMinute = 0.obs;
-
+  // Supplement Forms
   final supplementForms = [
     {"icon": "pill", "label": "Pill"},
     {"icon": "tablet", "label": "Tablet"},
@@ -35,11 +47,23 @@ class AddSupplementController extends GetxController {
     {"icon": "spoon", "label": "Spoon"},
   ];
 
-  final timesOfDay = [
-    {"icon": "sunrise", "label": "Morning"},
-    {"icon": "afternoon", "label": "Afternoon"},
-    {"icon": "sunset", "label": "Evening"},
-    {"icon": "night", "label": "Night"},
+  final frequencyOptions = [
+    'Everyday',
+    'Weekdays',
+    'Every other day',
+    'Weekends'
+  ];
+
+  final durationOptions = [
+    '3 days',
+    '7 days',
+    '14 days',
+    '30 days',
+    '60 days',
+    '90 days',
+    // 'Ongoing Use',
+    // 'Indefinite',
+    'Custom...'
   ];
 
   final mealOptions = [
@@ -50,56 +74,50 @@ class AddSupplementController extends GetxController {
     "No meal",
   ];
 
-  final frequencyOptions = [
-    'Everyday',
-    'Weekdays',
-    'Every other day',
-    'Weekends',
-  ];
-
-  final durationOptions = [
-    '3 days',
-    '7 days',
-    '14 days',
-    '30 days',
-    '60 days',
-    '90 days',
-    'Ongoing Use',
-    'Indefinite',
-    'Custom...',
-  ];
+  // Custom Time Picker Temporaries
+  final customHour = 0.obs;
+  final customMinute = 0.obs;
 
   @override
   void onInit() {
-    textController.addListener(() {
-      text.value = textController.text;
-    });
-    selectedMealOption.value = '';
-    selectedTimeOption.value = '';
     super.onInit();
+    selectedFrequency.value = frequencyOptions[0];
+    selectedDuration.value = durationOptions[0];
+    selectedMealOption.value = 'Before meal';
+    _initializeSelections(1); // Default: 1 dosage time
   }
 
-String get customTimeFormatted {
-    final h = customHour.value.toString().padLeft(2, '0');
-    final m = customMinute.value.toString().padLeft(2, '0');
-    return "$h:$m";
+  void _initializeSelections(int count) {
+    selectedTimeOptions.value = List.generate(count, (_) => ''.obs);
+    isCustomTimeSelected.value = List.generate(count, (_) => false.obs);
+    customTimeDisplayList.value = List.generate(count, (_) => "Add Custom Time");
   }
 
-  String get customTimeDisplay {
-    final h = customHour.value;
-    final m = customMinute.value;
-    final isAm = h < 12;
-    final formattedHour =
-        (h % 12 == 0 ? 12 : h % 12).toString().padLeft(2, '0');
-    final formattedMinute = m.toString().padLeft(2, '0');
-    return "$formattedHour:$formattedMinute ${isAm ? 'AM' : 'PM'}";
+  /// Handles preset time slot selection
+  void setPresetTime(int index, String label) {
+    selectedTimeOptions[index].value = label;
+    isCustomTimeSelected[index].value = false;
   }
 
+  /// Handles custom time selection
+  void setCustomTime(int index, String label) {
+    selectedTimeOptions[index].value = label;
+    isCustomTimeSelected[index].value = true;
+    customTimeDisplayList[index] = label;
+  }
+
+  /// Handles dosage times update (when user taps selector)
+  void updateDosageCount(int count) {
+    selectedDosageTimes.value = count;
+    _initializeSelections(count);
+  }
+
+  /// Handles 'Custom...' duration input
   void updateDuration(BuildContext context, String value) {
     if (value == 'Custom...') {
       showDialog(
         context: context,
-        builder: (ctx) {
+        builder: (_) {
           final controller = TextEditingController();
           return AlertDialog(
             title: const Text("Enter Custom Duration (days)"),
@@ -126,46 +144,76 @@ String get customTimeFormatted {
       selectedDuration.value = value;
     }
   }
-
-  void submitSupplement() async {
-    if (text.value.isEmpty ||
-    selectedFormIndex.value < 0 ||
-        selectedDosageTimes.value<1 ||
-        selectedDosageAmount.value<1 ||
-        selectedMealOption.value.isEmpty ||
-        selectedTimeOption.value.isEmpty) {
-      Get.snackbar("Missing Info", "Please fill all required fields.");
-      return;
-    }
-
-    final model = SupplementModel(
-      name: text.value,
-      form: supplementForms[selectedFormIndex.value]["label"]!,
-      dosageTimes: selectedDosageTimes.value,
-      dosageAmount: selectedDosageAmount.value,
-      frequency: selectedFrequency.value,
-      duration: selectedDuration.value,
-      timeOfDay: selectedTimeOption.value,
-      customTime: customTimeFormatted,
-      meal: selectedMealOption.value,
-      reminderBefore: isReminderBeforeTimeChecked.value,
-      reminderAfter: isReminderAfterTimeChecked.value,
-      createdAt: DateTime.now(),
-    );
-
-    try {
-      final userId = Get.find<AuthRepository>().currentUserId;
-      if (userId != null) {
-        await _repo.addSupplement(userId, model);
-        Get.back();
-        Get.snackbar("Success", "Supplement added");
-      } else {
-        Get.snackbar("Error", "No user found.");
-      }
-    } catch (e) {
-      Get.snackbar("Error", "Failed to add: $e");
-    }
+  //need to correct this logic//
+  int _parseDuration(String value) {
+  final regex = RegExp(r'\d+');
+  final match = regex.firstMatch(value);
+  if (match != null) {
+    return int.tryParse(match.group(0) ?? '') ?? 30;
   }
+  // For 'Ongoing Use' or 'Indefinite', fallback to default
+  return 30;
+}
+
+  /// Final submission method (you can later convert this to send model to backend)
+  void submitSupplement() async {
+  final name = textController.text.trim();
+
+  // Validation
+  if (name.isEmpty ||
+      selectedFormIndex.value < 0 ||
+      selectedDosageTimes.value < 1 ||
+      selectedDosageAmount.value < 1 ||
+      selectedMealOption.value.isEmpty ||
+      selectedTimeOptions.any((rx) => rx.value.isEmpty)) {
+    Get.snackbar("Missing Info", "Please fill all required fields.");
+    return;
+  }
+
+  final int durationDays = _parseDuration(selectedDuration.value);
+
+  // Build timeOfDay from reactive strings
+  final List<String> timeSlots =
+      selectedTimeOptions.map((rx) => rx.value).toList();
+
+  // Initialize tracking: duration days x dosageTimes
+  final tracking = List.generate(durationDays, (_) {
+    return {
+      for (int i = 0; i < selectedDosageTimes.value; i++) 'dose_$i': false,
+    };
+  });
+
+
+  final model = SupplementModel(
+    name: name,
+    form: supplementForms[selectedFormIndex.value]["label"]!,
+    dosageAmount: selectedDosageAmount.value,
+    dosageTimes: selectedDosageTimes.value,
+    frequency: selectedFrequency.value,
+    duration: durationDays,
+    meal: selectedMealOption.value,
+    timeOfDay: timeSlots,
+    reminderBefore: isReminderBeforeTimeChecked.value,
+    reminderAfter: isReminderAfterTimeChecked.value,
+    tracking: tracking,
+    createdAt: DateTime.now(),
+  );
+
+  try {
+    final userId = Get.find<AuthRepository>().currentUserId;
+
+    if (userId != null) {
+      await _repo.addSupplement(userId, model);
+      Get.back();
+      Get.snackbar("Success", "Supplement added");
+    } else {
+      Get.snackbar("Error", "No user logged in.");
+    }
+  } catch (e) {
+    log(e.toString());
+    Get.snackbar("Error", "Failed to add supplement: $e");
+  }
+}
 
   @override
   void onClose() {
