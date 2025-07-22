@@ -5,10 +5,14 @@ import 'package:onelook/components/style/button.dart';
 import 'package:onelook/components/style/text.dart';
 import 'package:onelook/components/widgets/buttons/outlined_button.dart';
 import 'package:onelook/components/widgets/card/stats_card.dart';
+import 'package:onelook/components/widgets/card/supplement_task.dart';
 import 'package:onelook/constants/app_color.dart';
+import 'package:onelook/controllers/home/home.dart';
+import 'package:onelook/data/models/today_dose_item.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final HomeScreenController controller = Get.find();
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Text('Hi Yuga!',
+                  Text('Hi ${controller.userController.userName}!',
                       style: TextStyles.withColor(textcolor: AppColors.deepBlue)
                           .headline1),
                   SizedBox(height: 40),
@@ -97,7 +101,8 @@ class HomeScreen extends StatelessWidget {
             ),
             // Health Stats Cards
             SizedBox(
-              height: screenHeight * 0.18, // Set height according to your StatsCard
+              height:
+                  screenHeight * 0.18, 
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(
@@ -107,13 +112,12 @@ class HomeScreen extends StatelessWidget {
                   final stat = stats[index];
                   return Padding(
                     padding: EdgeInsets.only(
-                        right: index == stats.length - 1
-                            ? 0
-                            : screenWidth * 0.04),
+                        right:
+                            index == stats.length - 1 ? 0 : screenWidth * 0.04),
                     child: StatsCard(
                       title: stat['title'],
                       rate: stat['rate'],
-                      onPressed: () {}, // Customize as needed
+                      onPressed: () {}, 
                       icon: stat['icon'],
                       color: stat['color'],
                     ),
@@ -205,7 +209,6 @@ class HomeScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-
                                     //Close Button
                                     Positioned(
                                       top: 8,
@@ -245,9 +248,37 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 16),
+                  Obx(() {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero, 
+                      itemCount: controller.todayDoses.length,
+                      itemBuilder: (context, index) {
+                        final TodayDoseItem supplement = controller.todayDoses[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12.0),
+                          child: SupplementTaskCard(
+                            title: supplement.name,
+                            subtitle: '${supplement.amount} ${supplement.form} ${supplement.meal.toLowerCase()} at ${supplement.time}',
+                            icon: supplement.form,
+                            isChecked: supplement.isChecked,
+                            onChecked: () {
+                              controller.toggleDoseCheck(
+                                docId: supplement.docId,
+                                dayIndex: supplement.dayIndex,
+                                doseIndex: supplement.doseIndex,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }),
                 ],
               ),
             ),
+            SizedBox(height: 8),
           ],
         ),
       ),

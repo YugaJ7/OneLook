@@ -11,6 +11,7 @@ class SupplementModel {
   final bool reminderAfter;
   final List<Map<String, bool>> tracking;
   final DateTime createdAt;
+  final DateTime endDate;
 
   SupplementModel({
     required this.name,
@@ -25,6 +26,7 @@ class SupplementModel {
     required this.reminderAfter,
     required this.tracking,
     required this.createdAt,
+    required this.endDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,6 +43,7 @@ class SupplementModel {
       'reminderAfter': reminderAfter,
       'tracking': tracking,
       'createdAt': createdAt.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
     };
   }
 
@@ -60,6 +63,7 @@ class SupplementModel {
         (data['tracking'] as List).map((e) => Map<String, bool>.from(e)),
       ),
       createdAt: DateTime.parse(data['createdAt']),
+      endDate: DateTime.parse(data['endDate']),
     );
   }
 }
