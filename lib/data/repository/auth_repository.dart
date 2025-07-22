@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:onelook/controllers/user_controller.dart';
 
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,6 +18,12 @@ class AuthRepository {
       _cachedUserId = user.uid;
     }
     return _cachedUserId;
+  }
+
+  AuthRepository() {
+    _auth.authStateChanges().listen((User? user) {
+      Get.find<UserController>().setUserData(user);
+    });
   }
 
   // SIGN UP with Email & Password + Save Name
@@ -41,6 +49,7 @@ class AuthRepository {
             'gender': null,
           }
         });
+         Get.find<UserController>().setUserData(user);
         return user;
       }
       return null;
@@ -61,6 +70,7 @@ class AuthRepository {
         email: email,
         password: password,
       );
+       Get.find<UserController>().setUserData(userCredential.user);
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       throw _handleFirebaseAuthError(e);
@@ -85,6 +95,7 @@ class AuthRepository {
   // LOGOUT
   Future<void> logout() async {
     await _auth.signOut();
+    Get.find<UserController>().setUserData(null);
   }
 
   // PRIVATE ERROR HANDLER

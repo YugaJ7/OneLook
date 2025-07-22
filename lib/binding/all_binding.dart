@@ -6,13 +6,16 @@ import 'package:onelook/controllers/auth/login_controller.dart';
 import 'package:onelook/controllers/auth/onboarding_controller.dart';
 import 'package:onelook/controllers/auth/sign_up_controller.dart';
 import 'package:onelook/controllers/auth/splash_controller.dart';
+import 'package:onelook/controllers/home/home.dart';
 import 'package:onelook/controllers/home/navbar_controller.dart';
+import 'package:onelook/controllers/user_controller.dart';
 import 'package:onelook/data/repository/auth_repository.dart';
 
 class InitialBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<AuthRepository>(AuthRepository(), permanent: true); 
+    Get.put<UserController>(UserController(), permanent: true);
   }
 }
 
@@ -76,7 +79,7 @@ class NavbarBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => NavbarController());
-    // Get.lazyPut(() => HomeScreenController());
+    Get.lazyPut(() => HomeScreenController());
     // Get.lazyPut(() => ActivityController());
     // Get.lazyPut(() => ProgressController());
     // Get.lazyPut(() => SettingController());

@@ -1,5 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:onelook/controllers/user_controller.dart';
 import 'package:onelook/data/repository/auth_repository.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
@@ -11,6 +12,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
   final showStartButton = false.obs;
 
   final AuthRepository _authRepo = AuthRepository();
+  final UserController _user = UserController();
 
   @override
   void onInit() {
@@ -50,6 +52,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
 
     if (_authRepo.isLoggedIn) {
       _authRepo.cacheUserId();
+      _user.setUserData(_authRepo.currentUser);
       Get.offAllNamed('/navbar');
     } else {
       showStartButton.value = true;

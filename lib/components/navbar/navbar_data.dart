@@ -7,7 +7,7 @@ import 'package:onelook/screens/settings/setting.dart';
 class NavbarData {
   // List of screens
   static final List<Widget> screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const ActivityScreen(),
     const ProgressScreen(),
     const SettingScreen(),
