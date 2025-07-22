@@ -29,14 +29,15 @@ class TimeSlotSelector extends StatelessWidget {
             itemCount: controller.timesOfDay.length,
             itemBuilder: (_, idx) {
               final item = controller.timesOfDay[idx];
+              final time =  controller.times[idx];
               return Obx(() {
                 final isSelected =
-                    controller.selectedTimeOptions[index].value == item['label'];
+                    controller.selectedTimeOptions[index].value == time['time'];
                 return FormOptionTile(
                   icon: item['icon']!,
                   label: item['label']!,
                   selected: isSelected,
-                  onTap: () => controller.setPresetTime(index, item['label']!),
+                  onTap: () => controller.setPresetTime(index, time['time']!),
                 );
               });
             },

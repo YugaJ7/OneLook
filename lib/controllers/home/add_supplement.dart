@@ -33,6 +33,12 @@ class AddSupplementController extends GetxController {
     {"icon": "sunset", "label": "Evening"},
     {"icon": "night", "label": "Night"},
   ];
+  final times = [
+    {"label": "Morning", "time": "8:00 AM"},
+    {"label": "Afternoon", "time": "12:00 PM"},
+    {"label": "Evening", "time": "4:00 PM"},
+    {"label": "Night", "time": "8:00 PM"},
+  ];
 
   final selectedTimeOptions = <RxString>[].obs;
   final isCustomTimeSelected = <RxBool>[].obs;
@@ -40,11 +46,11 @@ class AddSupplementController extends GetxController {
 
   // Supplement Forms
   final supplementForms = [
-    {"icon": "pill", "label": "Pill"},
-    {"icon": "tablet", "label": "Tablet"},
-    {"icon": "sachet", "label": "Sachet"},
-    {"icon": "drops", "label": "Drops"},
-    {"icon": "spoon", "label": "Spoon"},
+    {"icon": "pill", "label": "pill"},
+    {"icon": "tablet", "label": "tablet"},
+    {"icon": "sachet", "label": "sachet"},
+    {"icon": "drops", "label": "drops"},
+    {"icon": "spoon", "label": "spoon"},
   ];
 
   final frequencyOptions = [
@@ -197,6 +203,7 @@ class AddSupplementController extends GetxController {
     reminderAfter: isReminderAfterTimeChecked.value,
     tracking: tracking,
     createdAt: DateTime.now(),
+    endDate: DateTime.now().add(Duration(days: durationDays)),
   );
 
   try {
